@@ -7,6 +7,7 @@ import edu.uci.ics.jung.graph.util.Pair;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -19,9 +20,52 @@ import java.util.Set;
  * @author braully
  */
 public class UndirectedSparseGraphTO<V extends Number, E extends Number> extends UndirectedSparseGraph {
+    public Boolean isDirected = false;
+
+    public Boolean getIsDirected(){
+        return isDirected;
+    }
+
+    public void setIsDirected(Boolean isDirected){
+        this.isDirected = isDirected;
+    }
+
+    public Map<String, Integer> edgeWeights;
+
+    public Collection getWeights() {
+        List weights = new ArrayList();
+        Collection vertices1 = super.getVertices();
+        int edgeCount = this.getEdgeCount();
+        for(int i = 0; i < edgeCount; i++){
+            weights.add(edgeWeights.get(i));
+        }
+        return weights;
+    }
+
+    public void setWeights(Collection<Integer> weights) {
+        int i = 0;
+        for (Integer weight : weights) {
+            edgeWeights.put("" + i, weight);
+            i++;
+        }
+    }
+
+    public Integer  getEdgeWeight(E edge) {
+        return edgeWeights.get(edge + "");
+    }
+
+    public Integer  getEdgeWeight(String edge) {
+        return edgeWeights.get(edge);
+    }
+
+    public void setEdgeWeight(E edge, Integer weight) {
+        edgeWeights.put(edge + "", weight);
+    }
+
 
     public UndirectedSparseGraphTO() {
         super();
+        edgeWeights = new HashMap<>();
     }
 
     public UndirectedSparseGraphTO(String strEdegdsGraph) {
@@ -69,6 +113,7 @@ public class UndirectedSparseGraphTO<V extends Number, E extends Number> extends
         return super.getEdges();
     }
 
+
     public void setEdges(Map edges) {
         this.edges = edges;
     }
@@ -112,6 +157,7 @@ public class UndirectedSparseGraphTO<V extends Number, E extends Number> extends
     public Collection getVertices() {
         return cacheVertices();
     }
+
 
     public <V> V maxVertex() {
         V max = (V) Collections.max(this.cacheVertices());
@@ -385,5 +431,38 @@ public class UndirectedSparseGraphTO<V extends Number, E extends Number> extends
         }
         addVertex(newVert);
         return newVert;
+    }
+
+    public ArrayList<ArrayList<Integer>> getAdjMatrix(){
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+
+        String edgeString = this.getEdgeString();
+        String[] edges = edgeString != null ? edgeString.trim().split(",") : null;
+
+        for(int i = 0; i < getVertexCount(); i++){
+            adj.add(new ArrayList<>());
+            for(int j = 0; j < getVertexCount(); j++){
+                adj.get(i).add(-1);
+            }
+        }
+
+        for (int i = 0; i < edges.length; i++) {
+            String[] vs = edges[i].split("-");
+            if (vs.length >= 2) {
+                Integer source =  Integer.parseInt(vs[0].trim());
+                Integer target =  Integer.parseInt(vs[1].trim());
+
+                adj.get(source).set(target, i);
+                if(!this.isDirected){
+                    adj.get(target).set(source, i);
+                }
+            }       
+        }
+
+        return adj;
+    }
+
+    public boolean isVertex(int v){
+        return (v >= 0) && (v < this.getVertexCount());
     }
 }

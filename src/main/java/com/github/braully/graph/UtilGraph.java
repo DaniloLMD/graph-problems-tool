@@ -82,6 +82,7 @@ public class UtilGraph {
             try {
                 int vertexCount = undGraph.getVertexCount();
                 File file = File.createTempFile("graph-csr-", ".txt");
+
                 file.deleteOnExit();
 
                 strFile = file.getAbsolutePath();

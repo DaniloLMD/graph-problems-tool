@@ -173,6 +173,7 @@ public class GraphWS {
             for (IGraphGenerator generator : generators) {
                 if (typeGraph.equalsIgnoreCase(generator.getDescription())) {
                     graph = generator.generateGraph(params);
+                    
                     break;
                 }
             }
@@ -220,6 +221,8 @@ public class GraphWS {
             ObjectMapper mapper = new ObjectMapper();
             UndirectedSparseGraphTO graph = mapper.readValue(jsonGraph, UndirectedSparseGraphTO.class
             );
+
+
             if (graph != null) {
                 response.setHeader("Content-disposition", "attachment; filename=" + "file.csr");
                 response.setContentType("text/plain");
@@ -240,6 +243,7 @@ public class GraphWS {
             ObjectMapper mapper = new ObjectMapper();
             UndirectedSparseGraphTO graph = mapper.readValue(jsonGraph, UndirectedSparseGraphTO.class
             );
+
             if (graph != null) {
                 response.setHeader("Content-disposition", "attachment; filename=" + "file.csr");
                 response.setContentType("text/plain");
@@ -258,11 +262,16 @@ public class GraphWS {
     )
     public Map<String, Object> operation(@RequestBody String jsonGraph) {
         Map<String, Object> result = null;
+
         
+        System.out.println("JSON DO GRAFO = " + jsonGraph + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
         try {
             ObjectMapper mapper = new ObjectMapper();
             UndirectedSparseGraphTO graph = mapper.readValue(jsonGraph, UndirectedSparseGraphTO.class
-            );
+            );  
+
+
             IGraphOperation operation = null;
             if (graph != null && operators != null && graph.getOperation() != null) {
                 String strOperation = graph.getOperation();
@@ -279,7 +288,9 @@ public class GraphWS {
                     }
 
                     if (operation != null) {
+
                         executeOperation = new ExecuteOperation();
+                        
                         executeOperation.addGraph(graph);
                         executeOperation.setGraphOperation(operation);
                         executeOperation.start();
@@ -301,8 +312,8 @@ public class GraphWS {
         Map<String, Object> result = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            UndirectedSparseGraphTO graph
-                    = mapper.readValue(jsonGraph, UndirectedSparseGraphTO.class);
+            UndirectedSparseGraphTO graph = mapper.readValue(jsonGraph, UndirectedSparseGraphTO.class);
+
             IGraphOperation operation = null;
             if (graph != null && operators != null && graph.getOperation() != null) {
                 String strOperation = graph.getOperation();

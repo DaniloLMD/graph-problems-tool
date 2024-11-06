@@ -47,9 +47,11 @@ public class ExecuteOperation extends Thread {
                     if (graphs.size() > 1) {
                         log.info("Processing Graph " + i + " from " + graphs.size());
                     }
+
                     graph = graphs.get(i);
                     log.info(graphOperation.getTypeProblem() + ": " + graphOperation.getName());
                     log.info("Graph: " + graph.getName());
+
                     long currentTimeMillis = System.currentTimeMillis();
                     result = graphOperation.doOperation(graph);
                     currentTimeMillis = System.currentTimeMillis() - currentTimeMillis;
@@ -86,8 +88,8 @@ public class ExecuteOperation extends Thread {
         return graph;
     }
 
-    public void addGraph(UndirectedSparseGraphTO graph) {
-        this.graphs.add(graph);
+    public void addGraph(UndirectedSparseGraphTO grapha) {
+        this.graphs.add(grapha);
     }
 
     public Map<String, Object> getResult() {
