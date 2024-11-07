@@ -12,6 +12,7 @@ public class Dijkstra implements IGraphOperation {
 
     static final String type = "Danilo";
     static final String description = "Dijkstra";
+    static int INF = Integer.MAX_VALUE;
 
     int[] parent;
 
@@ -37,8 +38,17 @@ public class Dijkstra implements IGraphOperation {
         }
 
         int distance = dijkstra(graph, v, u);
-        response.put("Caminho mínimo de " + v + " para " + u, getShortestPath(v, u));
-        response.put("Peso do caminho mínimo de " + v + " para "  + u, distance);
+
+        if(distance == INF){
+            response.put("Caminho mínimo de " + v + " para " + u,  "Não existe");
+        }
+        else{
+            response.put("Caminho mínimo de " + v + " para " + u, getShortestPath(v, u));
+            response.put("Peso do caminho mínimo de " + v + " para "  + u, distance);
+        }
+        
+        
+
 
         return response;
     }
@@ -73,6 +83,8 @@ public class Dijkstra implements IGraphOperation {
         }
 
         PriorityQueue<Node> q = new PriorityQueue<>();
+
+        distances[u] = INF;
 
         q.add(new Node(v, 0, v));
 

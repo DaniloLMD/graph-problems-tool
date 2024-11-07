@@ -85,6 +85,12 @@ public class GraphTO<V extends Number, E extends Number> extends UndirectedSpars
         this();
         this.addEdgesFromString(strEdgesGraph, strWeights);
     }
+    public GraphTO(Integer n_vertices, String strEdgesGraph, String strWeights) {
+        this(strEdgesGraph, strWeights);
+        for (int i = 0; i < n_vertices; i++) {
+            this.addVertex(i);
+        }
+    }
 
     private List<V> cacheVertices;
 

@@ -38,7 +38,7 @@ public class DaniloWeightedGraph extends AbstractGraphGenerator {
     }
 
     public GraphTO<Integer, Integer> generate(Integer nvertices, String edges, String weights) {
-        GraphTO<Integer, Integer> graph = new GraphTO<>(edges, weights);
+        GraphTO<Integer, Integer> graph = new GraphTO<>(nvertices, edges, weights);
         graph.setName("Ponderado");
 
         return graph;
