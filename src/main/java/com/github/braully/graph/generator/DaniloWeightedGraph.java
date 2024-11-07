@@ -1,7 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.WeightedUndirectedSparseGraphTO;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +25,7 @@ public class DaniloWeightedGraph extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         Integer nvertices = getIntegerParameter(parameters, N_VERTICES);
         String edges = getStringParameter(parameters, EDGES);
         String weights = getStringParameter(parameters, WEIGHTS);
@@ -35,21 +34,12 @@ public class DaniloWeightedGraph extends AbstractGraphGenerator {
             nvertices = DEFAULT_NVERTICES;
         }
 
-        return (UndirectedSparseGraphTO<Integer, Integer>) generate(nvertices, edges, weights);
+        return (GraphTO<Integer, Integer>) generate(nvertices, edges, weights);
     }
 
-    public WeightedUndirectedSparseGraphTO<Integer, Integer> generate(Integer nvertices, String edges, String weights) {
-        WeightedUndirectedSparseGraphTO<Integer, Integer> graph = new WeightedUndirectedSparseGraphTO<>();
+    public GraphTO<Integer, Integer> generate(Integer nvertices, String edges, String weights) {
+        GraphTO<Integer, Integer> graph = new GraphTO<>(edges, weights);
         graph.setName("Ponderado");
-
-        Integer[] vertexs = new Integer[nvertices];
-
-        for (int i = 0; i < nvertices; i++) {
-            vertexs[i] = i;
-            graph.addVertex(vertexs[i]);
-        }
-
-        graph.addEdgesFromString(edges, weights);
 
         return graph;
     }

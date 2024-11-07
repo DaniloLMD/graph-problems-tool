@@ -60,7 +60,7 @@ public class UtilGraph {
             if (files != null) {
                 for (File f : files) {
                     try {
-                        UndirectedSparseGraphTO<Integer, Integer> undGraph = loadGraphAdjMatrix(new FileInputStream(f));
+                        GraphTO<Integer, Integer> undGraph = loadGraphAdjMatrix(new FileInputStream(f));
                         if (undGraph.getVertexCount() > 0) {
                             FileWriter filew = new FileWriter(new File(outputFilePath, f.getName() + ".csr"));
                             writerGraphToCsr(filew, undGraph);
@@ -76,7 +76,7 @@ public class UtilGraph {
         }
     }
 
-    public static synchronized String saveTmpFileGraphInCsr(UndirectedSparseGraphTO<Integer, Integer> undGraph) {
+    public static synchronized String saveTmpFileGraphInCsr(GraphTO<Integer, Integer> undGraph) {
         String strFile = null;
         if (undGraph != null && undGraph.getVertexCount() > 0) {
             try {
@@ -97,7 +97,7 @@ public class UtilGraph {
         return strFile;
     }
 
-    public static synchronized void writerGraphToCsr(Writer writer, UndirectedSparseGraphTO<Integer, Integer> undGraph) throws IOException {
+    public static synchronized void writerGraphToCsr(Writer writer, GraphTO<Integer, Integer> undGraph) throws IOException {
         if (undGraph == null || writer == null) {
             return;
         }
@@ -135,7 +135,7 @@ public class UtilGraph {
         writer.write("\n");
     }
 
-    public static synchronized List<Integer> csrColIdxs(UndirectedSparseGraphTO<Integer, Integer> undGraph) {
+    public static synchronized List<Integer> csrColIdxs(GraphTO<Integer, Integer> undGraph) {
         if (undGraph == null) {
             return null;
         }
@@ -160,7 +160,7 @@ public class UtilGraph {
         return csrColIdxs;
     }
 
-    public static synchronized List<Integer> rowOffset(UndirectedSparseGraphTO<Integer, Integer> undGraph) {
+    public static synchronized List<Integer> rowOffset(GraphTO<Integer, Integer> undGraph) {
         if (undGraph == null) {
             return null;
         }
@@ -185,7 +185,7 @@ public class UtilGraph {
         return rowOffset;
     }
 
-    static String saveTmpFileGraphInAdjMatrix(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    static String saveTmpFileGraphInAdjMatrix(GraphTO<Integer, Integer> graph) {
         String strFile = null;
         if (graph != null && graph.getVertexCount() > 0) {
             try {
@@ -205,7 +205,7 @@ public class UtilGraph {
         return strFile;
     }
 
-    public static synchronized void writerGraphToAdjMatrix(Writer writer, UndirectedSparseGraphTO<Integer, Integer> undGraph) throws IOException {
+    public static synchronized void writerGraphToAdjMatrix(Writer writer, GraphTO<Integer, Integer> undGraph) throws IOException {
         if (undGraph == null || writer == null) {
             return;
         }
@@ -231,8 +231,8 @@ public class UtilGraph {
         writer.write("\n");
     }
 
-    public static UndirectedSparseGraphTO<Integer, Integer> loadBigDatasetRaw(InputStream edgesStream) throws IOException {
-        UndirectedSparseGraphTO<Integer, Integer> ret = null;
+    public static GraphTO<Integer, Integer> loadBigDatasetRaw(InputStream edgesStream) throws IOException {
+        GraphTO<Integer, Integer> ret = null;
         if (edgesStream != null) {
             Map<Integer, Integer> vCount = new HashMap<>();
             TreeSet<Integer> mnodes = new TreeSet<>();
@@ -241,7 +241,7 @@ public class UtilGraph {
             int count = 0;
             String readLine = null;
             try {
-                ret = new UndirectedSparseGraphTO<Integer, Integer>();
+                ret = new GraphTO<Integer, Integer>();
 
                 BufferedReader redges = new BufferedReader(new InputStreamReader(edgesStream));
                 readLine = null;
@@ -272,8 +272,8 @@ public class UtilGraph {
         return ret;
     }
 
-    public static UndirectedSparseGraphTO<Integer, Integer> loadBigDataset(InputStream edgesStream) throws IOException {
-        UndirectedSparseGraphTO<Integer, Integer> ret = null;
+    public static GraphTO<Integer, Integer> loadBigDataset(InputStream edgesStream) throws IOException {
+        GraphTO<Integer, Integer> ret = null;
         if (edgesStream != null) {
             Map<Integer, Integer> vCount = new HashMap<>();
             TreeSet<Integer> mnodes = new TreeSet<>();
@@ -282,7 +282,7 @@ public class UtilGraph {
             int count = 0;
             String readLine = null;
             try {
-                ret = new UndirectedSparseGraphTO<Integer, Integer>();
+                ret = new GraphTO<Integer, Integer>();
 
                 BufferedReader redges = new BufferedReader(new InputStreamReader(edgesStream));
                 readLine = null;
@@ -324,14 +324,14 @@ public class UtilGraph {
         return ret;
     }
 
-    public static UndirectedSparseGraphTO<Integer, Integer> loadBigDataset(InputStream streamNodes, InputStream edgesStream) throws IOException {
-        UndirectedSparseGraphTO<Integer, Integer> ret = null;
+    public static GraphTO<Integer, Integer> loadBigDataset(InputStream streamNodes, InputStream edgesStream) throws IOException {
+        GraphTO<Integer, Integer> ret = null;
         if (streamNodes != null && edgesStream != null) {
             Map<Integer, Integer> vCount = new HashMap<>();
             int count = 0;
             String readLine = null;
             try {
-                ret = new UndirectedSparseGraphTO<Integer, Integer>();
+                ret = new GraphTO<Integer, Integer>();
                 BufferedReader rnodes = new BufferedReader(new InputStreamReader(streamNodes));
                 while ((readLine = rnodes.readLine()) != null
                         && !(readLine = readLine.trim()).startsWith("#")) {
@@ -375,8 +375,8 @@ public class UtilGraph {
         return ret;
     }
 
-    static UndirectedSparseGraphTO<Integer, Integer> loadGraphCsr(InputStream uploadedInputStream) throws IOException {
-        UndirectedSparseGraphTO<Integer, Integer> ret = null;
+    static GraphTO<Integer, Integer> loadGraphCsr(InputStream uploadedInputStream) throws IOException {
+        GraphTO<Integer, Integer> ret = null;
         try {
             if (uploadedInputStream != null) {
                 BufferedReader r = new BufferedReader(new InputStreamReader(uploadedInputStream));
@@ -394,7 +394,7 @@ public class UtilGraph {
                         && rowOffsetStr != null && !rowOffsetStr.trim().isEmpty()) {
                     String[] csrColIdxsStrSplited = csrColIdxsStr.trim().split(" ");
                     String[] rowOffsetStrSplited = rowOffsetStr.trim().split(" ");
-                    ret = new UndirectedSparseGraphTO<>();
+                    ret = new GraphTO<>();
                     int vertexCount = csrColIdxsStrSplited.length - 1;
                     int edgeCount = 0;
                     if (csrColIdxsStrSplited != null && csrColIdxsStrSplited.length > 0) {
@@ -421,15 +421,15 @@ public class UtilGraph {
         return ret;
     }
 
-    public static UndirectedSparseGraphTO<Integer, Integer> loadGraphAdjMatrix(InputStream uploadedInputStream) throws IOException {
-        UndirectedSparseGraphTO<Integer, Integer> ret = null;
+    public static GraphTO<Integer, Integer> loadGraphAdjMatrix(InputStream uploadedInputStream) throws IOException {
+        GraphTO<Integer, Integer> ret = null;
         try {
             if (uploadedInputStream != null) {
                 BufferedReader r = new BufferedReader(new InputStreamReader(uploadedInputStream));
                 List<String> lines = new ArrayList<>();
                 String readLine = null;
                 Integer verticeCount = 0;
-                ret = new UndirectedSparseGraphTO<>();
+                ret = new GraphTO<>();
 
                 while ((readLine = r.readLine()) != null) {
                     if (!readLine.trim().isEmpty()
@@ -472,15 +472,15 @@ public class UtilGraph {
         return ret;
     }
 
-    public static UndirectedSparseGraphTO<Integer, Integer> loadGraphAdjList(InputStream uploadedInputStream) throws IOException {
-        UndirectedSparseGraphTO<Integer, Integer> ret = null;
+    public static GraphTO<Integer, Integer> loadGraphAdjList(InputStream uploadedInputStream) throws IOException {
+        GraphTO<Integer, Integer> ret = null;
         try {
             if (uploadedInputStream != null) {
                 BufferedReader r = new BufferedReader(new InputStreamReader(uploadedInputStream));
                 List<String> lines = new ArrayList<>();
                 String readLine = null;
                 Integer verticeCount = 0;
-                ret = new UndirectedSparseGraphTO<>();
+                ret = new GraphTO<>();
 
                 while ((readLine = r.readLine()) != null) {
                     if (!readLine.trim().isEmpty()
@@ -527,11 +527,11 @@ public class UtilGraph {
     /*
      Code from:  https://github.com/bingmann/BispanningGame/blob/master/src/net/panthema/BispanningGame/Graph6.java
      */
-    public static UndirectedSparseGraphTO<Integer, Integer> loadGraphG6(String strGraph) throws IOException {
+    public static GraphTO<Integer, Integer> loadGraphG6(String strGraph) throws IOException {
         if (strGraph == null || strGraph.isEmpty()) {
             return null;
         }
-        UndirectedSparseGraphTO graph = null;
+        GraphTO graph = null;
         if (strGraph.charAt(0) == ':') {
             return loadGraphS6(strGraph.substring(1));
         }
@@ -544,7 +544,7 @@ public class UtilGraph {
 
         int numEdge = 0;
 
-        graph = new UndirectedSparseGraphTO(n);
+        graph = new GraphTO(n);
 
         for (int j = 1; j < n; ++j) {
             for (int i = 0; i < j; ++i) {
@@ -557,8 +557,8 @@ public class UtilGraph {
         return graph;
     }
 
-    public static UndirectedSparseGraphTO<Integer, Integer> loadGraphG6(InputStream uploadedInputStream) throws IOException {
-        UndirectedSparseGraphTO ret = null;
+    public static GraphTO<Integer, Integer> loadGraphG6(InputStream uploadedInputStream) throws IOException {
+        GraphTO ret = null;
         if (uploadedInputStream != null) {
             BufferedReader r = new BufferedReader(new InputStreamReader(uploadedInputStream));
             String readLine = null;
@@ -670,13 +670,13 @@ public class UtilGraph {
         }
     }
 
-    static UndirectedSparseGraphTO<Integer, Integer> loadGraphS6(String str) {
+    static GraphTO<Integer, Integer> loadGraphS6(String str) {
         ByteReader6 br6 = new ByteReader6(str);
 
         int numVertex = br6.get_number();
         int k = (int) Math.ceil(Math.log(numVertex) / Math.log(2));
 
-        UndirectedSparseGraphTO g = new UndirectedSparseGraphTO();
+        GraphTO g = new GraphTO();
 
         for (int i = 0; i < numVertex; ++i) {
             g.addVertex(i);
@@ -708,9 +708,9 @@ public class UtilGraph {
         return g;
     }
 
-    public static UndirectedSparseGraphTO<Integer, Integer> loadGraphES(String readLine) throws IOException {
-        UndirectedSparseGraphTO<Integer, Integer> ret = null;
-        ret = new UndirectedSparseGraphTO<>();
+    public static GraphTO<Integer, Integer> loadGraphES(String readLine) throws IOException {
+        GraphTO<Integer, Integer> ret = null;
+        ret = new GraphTO<>();
         int countEdge = 0;
         String[] edges = null;
         if (readLine != null && !readLine.isEmpty() && (edges = readLine.trim().split(",")) != null) {
@@ -733,10 +733,10 @@ public class UtilGraph {
         return ret;
     }
 
-    public static UndirectedSparseGraphTO<Integer, Integer> loadGraphES(InputStream uploadedInputStream) throws IOException {
-        UndirectedSparseGraphTO<Integer, Integer> ret = null;
+    public static GraphTO<Integer, Integer> loadGraphES(InputStream uploadedInputStream) throws IOException {
+        GraphTO<Integer, Integer> ret = null;
         if (uploadedInputStream != null) {
-            ret = new UndirectedSparseGraphTO<>();
+            ret = new GraphTO<>();
             BufferedReader r = new BufferedReader(new InputStreamReader(uploadedInputStream));
             String readLine = null;
             int countEdge = 0;
@@ -762,8 +762,8 @@ public class UtilGraph {
         return ret;
     }
 
-    public static UndirectedSparseGraphTO loadGraph(File file) {
-        UndirectedSparseGraphTO<Integer, Integer> ret = null;
+    public static GraphTO loadGraph(File file) {
+        GraphTO<Integer, Integer> ret = null;
         try {
             String fileName = file.getName();
             InputStream uploadedInputStream = new FileInputStream(file);

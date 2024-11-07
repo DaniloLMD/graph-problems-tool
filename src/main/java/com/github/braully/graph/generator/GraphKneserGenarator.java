@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -30,7 +30,7 @@ public class GraphKneserGenarator extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         Integer nvertices = getIntegerParameter(parameters, N_VERTICES);
         Integer kvertices = getIntegerParameter(parameters, K_VERTICES);
 
@@ -42,13 +42,13 @@ public class GraphKneserGenarator extends AbstractGraphGenerator {
             kvertices = 2;
         }
 
-        UndirectedSparseGraphTO<Integer, Integer> graph = generate(nvertices, kvertices);
+        GraphTO<Integer, Integer> graph = generate(nvertices, kvertices);
 
         return graph;
     }
 
-    public UndirectedSparseGraphTO<Integer, Integer> generate(Integer nvertices, Integer kvertices) {
-        UndirectedSparseGraphTO<Integer, Integer> graph = new UndirectedSparseGraphTO<>();
+    public GraphTO<Integer, Integer> generate(Integer nvertices, Integer kvertices) {
+        GraphTO<Integer, Integer> graph = new GraphTO<>();
         graph.setName("K(" + nvertices + "," + kvertices + ")");
         Map<Integer, Set> mvt = new HashMap<>();
         Iterator<int[]> combinationsIterator = CombinatoricsUtils.combinationsIterator(nvertices, kvertices);

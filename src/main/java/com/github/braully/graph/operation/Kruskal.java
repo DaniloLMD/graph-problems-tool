@@ -1,5 +1,5 @@
 package com.github.braully.graph.operation;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.Node;
 
 import java.util.HashMap;
@@ -17,7 +17,7 @@ public class Kruskal implements IGraphOperation {
     ArrayList<String> addedEdges;
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Map<String, Object> response = new HashMap<>();
 
         int peso = Kruskal(graph);
@@ -27,7 +27,7 @@ public class Kruskal implements IGraphOperation {
         return response;
     }
 
-    public int Kruskal(UndirectedSparseGraphTO<Integer,Integer> graph){
+    public int Kruskal(GraphTO<Integer,Integer> graph){
         
         parent = new int[graph.getVertexCount()];
         rank = new int[graph.getVertexCount()];

@@ -1,7 +1,7 @@
 package com.github.braully.graph.operation;
 
 import com.github.braully.graph.GraphWS;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import edu.uci.ics.jung.algorithms.shortestpath.BFSDistanceLabeler;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -19,7 +19,7 @@ public class GraphBFS implements IGraphOperation {
     private static final Logger log = Logger.getLogger(GraphWS.class);
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         /* Processar a buscar pelo hullset e hullnumber */
         Map<String, Object> response = new HashMap<>();
         try {

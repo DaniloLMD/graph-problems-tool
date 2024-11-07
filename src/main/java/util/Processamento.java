@@ -1,6 +1,6 @@
 package util;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import edu.uci.ics.jung.graph.util.Pair;
 import java.io.BufferedReader;
@@ -70,7 +70,7 @@ public class Processamento {
     long[] rbcount = new long[4];
 
     /* Estado */
-    UndirectedSparseGraphTO insumo;
+    GraphTO insumo;
     Collection<Integer> vertices;
     LinkedList<Integer> trabalhoPorFazer;
     LinkedList<Integer> trabalhoPorFazerOrigianl;
@@ -105,11 +105,11 @@ public class Processamento {
     }
 
     void loadGraph(String inputFilePath) {
-        UndirectedSparseGraphTO graph = UtilGraph.loadGraph(new File(inputFilePath));
+        GraphTO graph = UtilGraph.loadGraph(new File(inputFilePath));
         loadGraph(graph);
     }
 
-    private void loadGraph(UndirectedSparseGraphTO graph) {
+    private void loadGraph(GraphTO graph) {
         this.insumo = graph;
         this.vertices = (Collection<Integer>) graph.getVertices();
         this.trabalhoPorFazer = new LinkedList<>();
@@ -337,7 +337,7 @@ public class Processamento {
         recheckPossibilities(insumo);
     }
 
-    void recheckPossibilities(UndirectedSparseGraphTO insumo) {
+    void recheckPossibilities(GraphTO insumo) {
         System.out.println("Checking graph");
         boolean inviavel = false;
         Collection<Integer> vertices = insumo.getVertices();
@@ -383,7 +383,7 @@ public class Processamento {
                 }
             }
         }
-        UndirectedSparseGraphTO insumoTmp = sanitizarVertices(verticeSanitizar);
+        GraphTO insumoTmp = sanitizarVertices(verticeSanitizar);
         System.out.println("grafo sanitizado");
         System.out.println("reecheck");
         recheckPossibilities(insumoTmp);
@@ -401,7 +401,7 @@ public class Processamento {
                 verticeSanitizar.add(v);
             }
         }
-        UndirectedSparseGraphTO insumoTmp = sanitizarVertices(verticeSanitizar);
+        GraphTO insumoTmp = sanitizarVertices(verticeSanitizar);
         System.out.println("grafo stripe");
         System.out.println("reecheck");
         recheckPossibilities(insumoTmp);
@@ -411,8 +411,8 @@ public class Processamento {
         this.printGraphCount();
     }
 
-    public UndirectedSparseGraphTO sanitizarVertices(TreeSet<Integer> verticeSanitizar) throws IllegalStateException {
-        UndirectedSparseGraphTO insumoTmp = insumo.clone();
+    public GraphTO sanitizarVertices(TreeSet<Integer> verticeSanitizar) throws IllegalStateException {
+        GraphTO insumoTmp = insumo.clone();
         for (Integer v : verticeSanitizar) {
             System.out.println("Sanitizando vertice " + v);
             int degree = insumoTmp.degree(v);

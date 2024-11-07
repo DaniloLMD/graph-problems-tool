@@ -23,8 +23,8 @@ public class ExecuteOperation extends Thread {
     private static final Logger log = Logger.getLogger("WEBCONSOLE");
     /* */
     private IGraphOperation graphOperation;
-    private List<UndirectedSparseGraphTO> graphs;
-    UndirectedSparseGraphTO graph = null;
+    private List<GraphTO> graphs;
+    GraphTO graph = null;
     private Map<String, Object> result = null;
     private Long id;
 
@@ -84,11 +84,11 @@ public class ExecuteOperation extends Thread {
         this.graphOperation = graphOperation;
     }
 
-    public UndirectedSparseGraphTO getCurrentGraph() {
+    public GraphTO getCurrentGraph() {
         return graph;
     }
 
-    public void addGraph(UndirectedSparseGraphTO grapha) {
+    public void addGraph(GraphTO grapha) {
         this.graphs.add(grapha);
     }
 

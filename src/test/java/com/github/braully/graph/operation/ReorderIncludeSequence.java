@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,7 +26,7 @@ public class ReorderIncludeSequence {
     @Test
     public void reorder57() throws FileNotFoundException, IOException {
         GraphHullSetNC subgraph = new GraphHullSetNC();
-        UndirectedSparseGraphTO<Integer, Integer> graphES = UtilGraph.loadGraphES(new FileInputStream("./esqueleto-ultimo-grafo-moore.es"));
+        GraphTO<Integer, Integer> graphES = UtilGraph.loadGraphES(new FileInputStream("./esqueleto-ultimo-grafo-moore.es"));
         String viz = "0, 56, 1, 57, 3191";
         Set<Integer> set = new LinkedHashSet<>();
         String[] split = viz.split(",");
@@ -87,7 +87,7 @@ public class ReorderIncludeSequence {
     @Test
     public void reorder7() throws FileNotFoundException, IOException {
         GraphHullSetNC subgraph = new GraphHullSetNC();
-        UndirectedSparseGraphTO<Integer, Integer> graphES = UtilGraph.loadGraphES(new FileInputStream("./esqueleto-grafo-moore-50.es"));
+        GraphTO<Integer, Integer> graphES = UtilGraph.loadGraphES(new FileInputStream("./esqueleto-grafo-moore-50.es"));
         String viz = "0, 6, 1, 7, 41";
         Set<Integer> set = new LinkedHashSet<>();
         String[] split = viz.split(",");
@@ -144,7 +144,7 @@ public class ReorderIncludeSequence {
         }
     }
 
-    protected boolean addV(GraphHullSetNC subgraph, Integer v, Set<Integer> includeat, UndirectedSparseGraphTO<Integer, Integer> graphES) {
+    protected boolean addV(GraphHullSetNC subgraph, Integer v, Set<Integer> includeat, GraphTO<Integer, Integer> graphES) {
         boolean end = false;
 
         List<Integer> nss = subgraph.includedSequenceN.get(v);
@@ -168,7 +168,7 @@ public class ReorderIncludeSequence {
     @Test
     public void testHsForall() throws FileNotFoundException, IOException {
         GraphHullSetNC subgraph = new GraphHullSetNC();
-        UndirectedSparseGraphTO<Integer, Integer> graphES = UtilGraph.loadGraphES(new FileInputStream("./estripado-esqueleto-grafo-moore-50.es"));
+        GraphTO<Integer, Integer> graphES = UtilGraph.loadGraphES(new FileInputStream("./estripado-esqueleto-grafo-moore-50.es"));
         String viz = "0, 6, 49";
         Set<Integer> set = new LinkedHashSet<>();
         String[] split = viz.split(",");

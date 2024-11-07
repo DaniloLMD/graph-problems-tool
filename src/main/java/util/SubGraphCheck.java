@@ -1,6 +1,6 @@
 package util;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,8 +21,8 @@ public class SubGraphCheck {
             System.err.println("args: file-graphs.es file-subraph.es [seq-start]");
             return;
         }
-        UndirectedSparseGraphTO graph = UtilGraph.loadGraphES(new FileInputStream(args[0]));
-        UndirectedSparseGraphTO subgraph = UtilGraph.loadGraphES(new FileInputStream(args[1]));
+        GraphTO graph = UtilGraph.loadGraphES(new FileInputStream(args[0]));
+        GraphTO subgraph = UtilGraph.loadGraphES(new FileInputStream(args[1]));
         if (graph.getVertexCount() == 0 || graph.getEdgeCount() == 0 || subgraph.getVertexCount() == 0 || subgraph.getEdgeCount() == 0) {
             System.err.println("exists empty graph");
             return;

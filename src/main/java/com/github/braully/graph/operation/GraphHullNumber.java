@@ -1,7 +1,7 @@
 package com.github.braully.graph.operation;
 
 import com.github.braully.graph.GraphWS;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import static com.github.braully.graph.operation.GraphCaratheodoryCheckSet.PROCESSED;
 import edu.uci.ics.jung.algorithms.shortestpath.BFSDistanceLabeler;
 import java.util.ArrayDeque;
@@ -40,7 +40,7 @@ public class GraphHullNumber implements IGraphOperation {
     Integer sizeStart = null;
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Integer hullNumber = -1;
         Set<Integer> minHullSet = null;
         sizeStart = null;
@@ -69,7 +69,7 @@ public class GraphHullNumber implements IGraphOperation {
     }
 
     public int addVertToS(Integer verti, Set<Integer> s,
-            UndirectedSparseGraphTO<Integer, Integer> graph,
+            GraphTO<Integer, Integer> graph,
             int[] aux) {
         int countIncluded = 0;
         if (verti == null || aux[verti] >= INCLUDED) {
@@ -99,7 +99,7 @@ public class GraphHullNumber implements IGraphOperation {
         return countIncluded;
     }
 
-    public Set<Integer> calcMinHullNumberGraph(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Set<Integer> calcMinHullNumberGraph(GraphTO<Integer, Integer> graph) {
         Set<Integer> ceilling = calcCeillingHullNumberGraph(graph);
         Set<Integer> hullSet = ceilling;
         if (graph == null || graph.getVertexCount() == 0) {
@@ -138,7 +138,7 @@ public class GraphHullNumber implements IGraphOperation {
         return hullSet;
     }
 
-    private Set<Integer> calcCeillingHullNumberGraph(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    private Set<Integer> calcCeillingHullNumberGraph(GraphTO<Integer, Integer> graph) {
         Set<Integer> ceilling = new HashSet<>();
         if (graph != null) {
             Collection<Integer> vertices = heuristic.buildOptimizedHullSet(graph);
@@ -154,7 +154,7 @@ public class GraphHullNumber implements IGraphOperation {
         return ceilling;
     }
 
-    public Set<Integer> findHullSetBruteForce(UndirectedSparseGraphTO<Integer, Integer> graph,
+    public Set<Integer> findHullSetBruteForce(GraphTO<Integer, Integer> graph,
             int currentSetSize) {
         Set<Integer> hullSet = null;
         if (graph == null || graph.getVertexCount() <= 0) {
@@ -174,7 +174,7 @@ public class GraphHullNumber implements IGraphOperation {
         return hullSet;
     }
 
-    public boolean checkIfHullSet(UndirectedSparseGraphTO<Integer, Integer> graph,
+    public boolean checkIfHullSet(GraphTO<Integer, Integer> graph,
             Integer... currentSet) {
         if (currentSet == null || currentSet.length == 0) {
             return false;
@@ -211,7 +211,7 @@ public class GraphHullNumber implements IGraphOperation {
         return fecho.size() == graph.getVertexCount();
     }
 
-    public boolean checkIfHullSet(UndirectedSparseGraphTO<Integer, Integer> graph,
+    public boolean checkIfHullSet(GraphTO<Integer, Integer> graph,
             int[] currentSet) {
         if (currentSet == null || currentSet.length == 0) {
             return false;
@@ -248,7 +248,7 @@ public class GraphHullNumber implements IGraphOperation {
         return fecho.size() == graph.getVertexCount();
     }
 
-    public void includeVertex(UndirectedSparseGraphTO<Integer, Integer> graph, Set<Integer> fecho, int[] aux, int i) {
+    public void includeVertex(GraphTO<Integer, Integer> graph, Set<Integer> fecho, int[] aux, int i) {
         fecho.add(i);
         aux[i] = INCLUDED;
         Collection<Integer> neighbors = graph.getNeighbors(i);
@@ -275,7 +275,7 @@ public class GraphHullNumber implements IGraphOperation {
         return description;
     }
 
-    public Map<Integer, Integer> numConnectedComponents(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<Integer, Integer> numConnectedComponents(GraphTO<Integer, Integer> graph) {
         int ret = 0;
         Map<Integer, Integer> map = new TreeMap<>();
         BFSDistanceLabeler<Integer, Integer> bdl = new BFSDistanceLabeler<>();

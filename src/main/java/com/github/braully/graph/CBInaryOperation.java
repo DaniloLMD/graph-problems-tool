@@ -70,7 +70,7 @@ public class CBInaryOperation implements IGraphOperation, Interruptible {
     }
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Map<String, Object> response = null;
         try {
             String commandToExecute = getExecuteCommand(graph);
@@ -146,7 +146,7 @@ public class CBInaryOperation implements IGraphOperation, Interruptible {
         }
     }
 
-    private String getExecuteCommand(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    private String getExecuteCommand(GraphTO<Integer, Integer> graph) {
         String path = "";
 
         String inputData = graph.getInputData();

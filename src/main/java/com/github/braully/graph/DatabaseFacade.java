@@ -50,19 +50,19 @@ public class DatabaseFacade {
         }
     }
 
-    static List<UndirectedSparseGraphTO> getAllGraphsBatchDiretory() {
-        List<UndirectedSparseGraphTO> graphTOs = new ArrayList<>();
+    static List<GraphTO> getAllGraphsBatchDiretory() {
+        List<GraphTO> graphTOs = new ArrayList<>();
         try {
             File dir = new File(BATCH_DIRECTORY);
             File[] filesList = dir.listFiles();
             for (File file : filesList) {
                 String name = file.getName();
                 if (name.toLowerCase().endsWith(".csr")) {
-                    UndirectedSparseGraphTO loadGraphCsr = UtilGraph.loadGraphCsr(new FileInputStream(file));
+                    GraphTO loadGraphCsr = UtilGraph.loadGraphCsr(new FileInputStream(file));
                     loadGraphCsr.setName(name);
                     graphTOs.add(loadGraphCsr);
                 } else if (name.toLowerCase().endsWith(".mat")) {
-                    UndirectedSparseGraphTO loadGraphAdjMatrix = UtilGraph.loadGraphAdjMatrix(new FileInputStream(file));
+                    GraphTO loadGraphAdjMatrix = UtilGraph.loadGraphAdjMatrix(new FileInputStream(file));
                     loadGraphAdjMatrix.setName(name);
                     graphTOs.add(loadGraphAdjMatrix);
                 }
@@ -73,7 +73,7 @@ public class DatabaseFacade {
         return graphTOs;
     }
 
-    private static void removeBatchDiretoryIfExists(UndirectedSparseGraphTO graph) {
+    private static void removeBatchDiretoryIfExists(GraphTO graph) {
         try {
             String name = graph.getName();
             File dir = new File(BATCH_DIRECTORY);
@@ -275,7 +275,7 @@ public class DatabaseFacade {
         return results;
     }
 
-    public static synchronized void saveResult(UndirectedSparseGraphTO graph,
+    public static synchronized void saveResult(GraphTO graph,
             IGraphOperation graphOperation,
             Map<String, Object> result, List<String> consoleOut) {
         if (result != null && graph != null && graphOperation != null) {
@@ -314,7 +314,7 @@ public class DatabaseFacade {
         }
     }
 
-    public static String saveGraph(UndirectedSparseGraphTO graph) {
+    public static String saveGraph(GraphTO graph) {
         if (graph == null) {
             return null;
         }
@@ -370,13 +370,13 @@ public class DatabaseFacade {
         return fileName;
     }
 
-    public static UndirectedSparseGraphTO openGraph(String nameFile) throws IOException {
+    public static GraphTO openGraph(String nameFile) throws IOException {
         if (nameFile == null) {
             return null;
         }
-        UndirectedSparseGraphTO graph = null;
+        GraphTO graph = null;
         ObjectMapper mapper = new ObjectMapper();
-        graph = mapper.readValue(new File(DATABASE_DIRECTORY_GRAPH + File.separator + nameFile), UndirectedSparseGraphTO.class);
+        graph = mapper.readValue(new File(DATABASE_DIRECTORY_GRAPH + File.separator + nameFile), GraphTO.class);
         return graph;
     }
 

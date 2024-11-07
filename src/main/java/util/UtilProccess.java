@@ -1,6 +1,6 @@
 package util;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -245,7 +245,7 @@ public class UtilProccess {
         }
     }
 
-    public static void bfs(UndirectedSparseGraphTO<Integer, Integer> subgraph, Integer[] bfs, Integer v) {
+    public static void bfs(GraphTO<Integer, Integer> subgraph, Integer[] bfs, Integer v) {
         for (int i = 0; i < bfs.length; i++) {
             bfs[i] = null;
         }
@@ -253,7 +253,7 @@ public class UtilProccess {
         visitVertex(v, bfs, subgraph);
     }
 
-    public static void visitVertex(Integer v, Integer[] bfs, UndirectedSparseGraphTO<Integer, Integer> subgraph1) {
+    public static void visitVertex(Integer v, Integer[] bfs, GraphTO<Integer, Integer> subgraph1) {
         queue.clear();
         queue.add(v);
         while (!queue.isEmpty()) {
@@ -272,7 +272,7 @@ public class UtilProccess {
         }
     }
 
-    static void revisitVertex(Integer hold, Integer[] bfs3, UndirectedSparseGraphTO<Integer, Integer> subgraph) {
+    static void revisitVertex(Integer hold, Integer[] bfs3, GraphTO<Integer, Integer> subgraph) {
         if (hold == null || bfs3[hold] != 0) {
             throw new IllegalStateException("BFS From another root");
         }
@@ -315,12 +315,12 @@ public class UtilProccess {
         return ret;
     }
 
-    static void dumpVertAddArray(UndirectedSparseGraphTO lastgraph,
+    static void dumpVertAddArray(GraphTO lastgraph,
             int numArestasIniciais, TreeMap<Integer, Collection<Integer>> caminhoPercorrido) {
         dumpVertAddArray(lastgraph, numArestasIniciais, caminhoPercorrido, "");
     }
 
-    static void dumpVertAddArray(UndirectedSparseGraphTO lastgraph,
+    static void dumpVertAddArray(GraphTO lastgraph,
             int numArestasIniciais, TreeMap<Integer, Collection<Integer>> caminhoPercorrido, String offset) {
         dumpVertAddArray(lastgraph, numArestasIniciais, caminhoPercorrido, "", true);
     }
@@ -329,7 +329,7 @@ public class UtilProccess {
         return lastComb;
     }
 
-    static void dumpVertAddArray(UndirectedSparseGraphTO lastgraph,
+    static void dumpVertAddArray(GraphTO lastgraph,
             int numArestasIniciais, TreeMap<Integer, Collection<Integer>> caminhoPercorrido, String offset, boolean trunk) {
         System.out.print("Dump-edge: ");
         try {
@@ -400,7 +400,7 @@ public class UtilProccess {
         }
     }
 
-    static void dumpVertAddArray(UndirectedSparseGraphTO lastgraph, int numArestasIniciais) {
+    static void dumpVertAddArray(GraphTO lastgraph, int numArestasIniciais) {
         System.out.print("Dump-edge: ");
         try {
             FileWriter fileWriter = new FileWriter(fileDump, true);

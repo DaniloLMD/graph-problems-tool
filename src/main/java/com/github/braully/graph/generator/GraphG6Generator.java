@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import org.apache.log4j.Logger;
 
@@ -26,10 +26,10 @@ public class GraphG6Generator extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         String g6code = getStringParameter(parameters, N_VERTICES);
 
-        UndirectedSparseGraphTO<Integer, Integer> graph = null;
+        GraphTO<Integer, Integer> graph = null;
         try {
             System.out.println("G6CODE: " + g6code);
             graph = UtilGraph.loadGraphG6(g6code);

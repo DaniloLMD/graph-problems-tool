@@ -5,7 +5,7 @@
  */
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,7 +28,7 @@ public class GraphCaratheodoryNumberOptm extends GraphCaratheodoryCheckSet {
     public static final int THRESHOLD_HEURISTIC_FEED = 15;
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Map<String, Object> result = null;
         if (graph == null) {
             return result;
@@ -105,7 +105,7 @@ public class GraphCaratheodoryNumberOptm extends GraphCaratheodoryCheckSet {
         return result;
     }
 
-    public OperationConvexityGraphResult findCaratheodroySetBruteForce(UndirectedSparseGraphTO<Integer, Integer> graph, int currentSize) {
+    public OperationConvexityGraphResult findCaratheodroySetBruteForce(GraphTO<Integer, Integer> graph, int currentSize) {
         OperationConvexityGraphResult processedHullSet = null;
         if (graph == null || graph.getVertexCount() <= 0) {
             return processedHullSet;

@@ -1,5 +1,5 @@
 package com.github.braully.graph.operation;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.Node;
 
 import java.util.HashMap;
@@ -17,7 +17,7 @@ public class Dijkstra implements IGraphOperation {
 
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Map<String, Object> response = new HashMap<>();
 
         int v = 0, u = graph.getVertexCount() - 1;
@@ -60,7 +60,7 @@ public class Dijkstra implements IGraphOperation {
         return shortest_path;
     }
 
-    public int dijkstra(UndirectedSparseGraphTO<Integer,Integer> graph, int v, int u){
+    public int dijkstra(GraphTO<Integer,Integer> graph, int v, int u){
 
         int[] distances = new int[graph.getVertexCount()];
         boolean[] visited = new boolean[graph.getVertexCount()];

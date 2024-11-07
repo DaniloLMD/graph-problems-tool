@@ -302,7 +302,7 @@ public class BatchExecuteOperation implements IBatchExecute {
         if (verbose) {
             System.out.println("Processing file: " + file.getName());
         }
-        UndirectedSparseGraphTO loadGraphAdjMatrix = UtilGraph.loadGraphES(new FileInputStream(file));
+        GraphTO loadGraphAdjMatrix = UtilGraph.loadGraphES(new FileInputStream(file));
         loadGraphAdjMatrix.setName(file.getName());
         String processGraph = processGraph(operation, loadGraphAdjMatrix, dirname, 0);
     }
@@ -316,14 +316,14 @@ public class BatchExecuteOperation implements IBatchExecute {
         if (verbose) {
             System.out.println("Processing file: " + file.getName());
         }
-        UndirectedSparseGraphTO loadGraphAdjMatrix = UtilGraph.loadGraphAdjList(new FileInputStream(file));
+        GraphTO loadGraphAdjMatrix = UtilGraph.loadGraphAdjList(new FileInputStream(file));
         loadGraphAdjMatrix.setName(file.getName());
         String processGraph = processGraph(operation, loadGraphAdjMatrix, dirname, 0);
     }
 
     void processFileMat(IGraphOperation operation, File file,
             String dirname) throws IOException {
-        UndirectedSparseGraphTO loadGraphAdjMatrix = UtilGraph.loadGraphAdjMatrix(new FileInputStream(file));
+        GraphTO loadGraphAdjMatrix = UtilGraph.loadGraphAdjMatrix(new FileInputStream(file));
         loadGraphAdjMatrix.setName(file.getName());
         processGraph(operation, loadGraphAdjMatrix, dirname, 0);
     }
@@ -391,7 +391,7 @@ public class BatchExecuteOperation implements IBatchExecute {
         String readLine;
         while ((readLine = r.readLine()) != null && !readLine.isEmpty()) {
             try {
-                UndirectedSparseGraphTO ret = UtilGraph.loadGraphG6(readLine);
+                GraphTO ret = UtilGraph.loadGraphG6(readLine);
                 if (ret != null) {
                     if (graphcount > continueOffset) {
                         ret.setName(graphFileName + "-" + graphcount + ": " + readLine);
@@ -437,7 +437,7 @@ public class BatchExecuteOperation implements IBatchExecute {
         return continueOffset;
     }
 
-    public String processGraph(IGraphOperation operation, UndirectedSparseGraphTO loadGraphAdjMatrix, String groupName,
+    public String processGraph(IGraphOperation operation, GraphTO loadGraphAdjMatrix, String groupName,
             long graphcount) {
         if (loadGraphAdjMatrix == null || loadGraphAdjMatrix.getVertexCount() == 0) {
             return null;
@@ -472,7 +472,7 @@ public class BatchExecuteOperation implements IBatchExecute {
         return formatResult;
     }
 
-    public String formatResult(String name, String id, UndirectedSparseGraphTO loadGraphAdjMatrix,
+    public String formatResult(String name, String id, GraphTO loadGraphAdjMatrix,
             IGraphOperation operation, Map result) {
         StringBuilder sb = new StringBuilder();
         sb.append(name);
@@ -488,7 +488,7 @@ public class BatchExecuteOperation implements IBatchExecute {
         return sb.toString();
     }
 
-    public String formatResultSimple(String name, String id, UndirectedSparseGraphTO loadGraphAdjMatrix,
+    public String formatResultSimple(String name, String id, GraphTO loadGraphAdjMatrix,
             IGraphOperation operation, Map result) {
         StringBuilder sb = new StringBuilder();
         sb.append(id);
@@ -500,7 +500,7 @@ public class BatchExecuteOperation implements IBatchExecute {
         return sb.toString();
     }
 
-    public String printResultMap(Map result, UndirectedSparseGraphTO loadGraphAdjMatrix) {
+    public String printResultMap(Map result, GraphTO loadGraphAdjMatrix) {
         StringBuilder sb = new StringBuilder();
         sb.append(result.get(IGraphOperation.DEFAULT_PARAM_NAME_RESULT));
         sb.append("\t");
@@ -604,7 +604,7 @@ public class BatchExecuteOperation implements IBatchExecute {
         return fileList;
     }
 
-    public void inforResult(String group, String id, UndirectedSparseGraphTO loadGraphAdjMatrix, IGraphOperation operation, Map result) {
+    public void inforResult(String group, String id, GraphTO loadGraphAdjMatrix, IGraphOperation operation, Map result) {
 
     }
 

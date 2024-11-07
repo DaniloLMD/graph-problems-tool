@@ -21,7 +21,7 @@ public class BFSUpdateTest {
             + "47-49,49-48,"
             + "47-0,48-6,47-1,48-7,47-2,48-8,47-3,48-9,47-4,48-10,47-5,48-11,";
 
-    UndirectedSparseGraphTO graph = new UndirectedSparseGraphTO(strGraph);
+    GraphTO graph = new GraphTO(strGraph);
 
     // <17, 27>, <17, 28>, <17, 32>, <17, 35>, 
     // <18, 23>, <18, 28>, <18, 31>, <18, 39>,

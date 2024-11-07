@@ -23,7 +23,7 @@
  */
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.operation.GraphCycleChordlessDetec;
 import com.github.braully.graph.operation.GraphHullNumber;
 import com.github.braully.graph.operation.IGraphOperation;
@@ -55,7 +55,7 @@ public class CycleHullCheck implements IGraphOperation {
     GraphHullNumber hull = new GraphHullNumber();
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         /* Processar a buscar pelo hullset e hullnumber */
         int hulln = 0;
         int cycleSize = 6;

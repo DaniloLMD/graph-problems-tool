@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.Map;
 
 public class GraphGeneratorHypercube extends AbstractGraphGenerator {
@@ -22,7 +22,7 @@ public class GraphGeneratorHypercube extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         Integer nvertices = getIntegerParameter(parameters, N_VERTICES);
 
         if (nvertices == null) {
@@ -32,8 +32,8 @@ public class GraphGeneratorHypercube extends AbstractGraphGenerator {
         return generate(nvertices);
     }
 
-    public UndirectedSparseGraphTO<Integer, Integer> generate(Integer n) throws NumberFormatException {
-        UndirectedSparseGraphTO<Integer, Integer> graph = new UndirectedSparseGraphTO<>();
+    public GraphTO<Integer, Integer> generate(Integer n) throws NumberFormatException {
+        GraphTO<Integer, Integer> graph = new GraphTO<>();
         graph.setName("Q" + n);
         int nvertices = (int) Math.pow(2, n);
         Integer[] vertexs = new Integer[nvertices];

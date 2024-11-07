@@ -1,7 +1,7 @@
 package com.github.braully.graph.generator;
 
 import com.github.braully.graph.CombinationsFacade;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 
 import static com.github.braully.graph.generator.GraphGeneratorKP.K_VERTICES;
 import java.math.BigInteger;
@@ -34,10 +34,10 @@ public class GraphNKIndexedGenerator extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         String nmindexcode = getStringParameter(parameters, N_VERTICES);
 
-        UndirectedSparseGraphTO<Integer, Integer> graph = null;
+        GraphTO<Integer, Integer> graph = null;
         try {
             String[] split = nmindexcode.split(",");
 
@@ -45,7 +45,7 @@ public class GraphNKIndexedGenerator extends AbstractGraphGenerator {
             Integer pvertices = Integer.parseInt(split[1].replaceAll("\\D", ""));
             BigInteger nkindex = new BigInteger(split[2].replaceAll("\\D", ""));
 
-            graph = new UndirectedSparseGraphTO<>();
+            graph = new GraphTO<>();
             String name = "N" + nvertices + ",M" + pvertices + "-Indexed" + nkindex;
             graph.setName(name);
             List<Integer> vertexElegibles = new ArrayList<>(nvertices);

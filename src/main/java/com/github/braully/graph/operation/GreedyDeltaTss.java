@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import java.io.IOException;
 import java.io.InputStream;
@@ -67,7 +67,7 @@ public class GreedyDeltaTss
 
     public static void main(String... args) throws IOException {
         System.out.println("Execution Sample: BlogCatalog database R=2");
-        UndirectedSparseGraphTO<Integer, Integer> graph = null;
+        GraphTO<Integer, Integer> graph = null;
         GreedyDeltaTss op = new GreedyDeltaTss();
 
 //        URI urinode = URI.create("jar:file:data/big/all-big.zip!/Livemocha/nodes.csv");

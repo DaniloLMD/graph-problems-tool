@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import static java.lang.Math.abs;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -84,7 +84,7 @@ public abstract class AbstractHeuristic implements IGraphOperation {
         return kr;
     }
 
-    public void setRandomKr(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public void setRandomKr(GraphTO<Integer, Integer> graph) {
         int vertexCount = (Integer) graph.maxVertex() + 1;
         kr = new int[vertexCount];
         for (int i = 0; i < vertexCount; i++) {
@@ -98,7 +98,7 @@ public abstract class AbstractHeuristic implements IGraphOperation {
         }
     }
 
-    public void initKr(UndirectedSparseGraphTO graph) {
+    public void initKr(GraphTO graph) {
         if (rTreshold != null || kTreshold != null || percentTreshold != null) {
             int vertexCount = (Integer) graph.maxVertex() + 1;
             kr = new int[vertexCount];
@@ -151,7 +151,7 @@ public abstract class AbstractHeuristic implements IGraphOperation {
         return sb.toString();
     }
 
-    public Set<Integer> refineResult(UndirectedSparseGraphTO<Integer, Integer> graph, Set<Integer> s, int targetSize) {
+    public Set<Integer> refineResult(GraphTO<Integer, Integer> graph, Set<Integer> s, int targetSize) {
         if (refine) {
             s = refineResultStep1(graph, s, targetSize);
         }
@@ -161,7 +161,7 @@ public abstract class AbstractHeuristic implements IGraphOperation {
         return s;
     }
 
-    public Set<Integer> refineResultStep1(UndirectedSparseGraphTO<Integer, Integer> graphRead,
+    public Set<Integer> refineResultStep1(GraphTO<Integer, Integer> graphRead,
             Set<Integer> tmp, int tamanhoAlvo) {
         Set<Integer> s = new LinkedHashSet<>(tmp);
 
@@ -180,7 +180,7 @@ public abstract class AbstractHeuristic implements IGraphOperation {
         return s;
     }
 
-    public Set<Integer> refineResultStep2(UndirectedSparseGraphTO<Integer, Integer> graphRead,
+    public Set<Integer> refineResultStep2(GraphTO<Integer, Integer> graphRead,
             Set<Integer> tmp, int tamanhoAlvo) {
         Set<Integer> s = tmp;
 
@@ -260,7 +260,7 @@ public abstract class AbstractHeuristic implements IGraphOperation {
         this.verbose = verbose;
     }
 
-    public boolean checkIfHullSet(UndirectedSparseGraphTO<Integer, Integer> graph,
+    public boolean checkIfHullSet(GraphTO<Integer, Integer> graph,
             Iterable<Integer> currentSet) {
         if (currentSet == null) {
             return false;
@@ -306,7 +306,7 @@ public abstract class AbstractHeuristic implements IGraphOperation {
         return fecho.size() == vertexCount;
     }
 
-    public Set<Integer> tryMinimal(UndirectedSparseGraphTO<Integer, Integer> graphRead,
+    public Set<Integer> tryMinimal(GraphTO<Integer, Integer> graphRead,
             Set<Integer> tmp) {
         Set<Integer> s = tmp;
         if (verbose) {
@@ -346,7 +346,7 @@ public abstract class AbstractHeuristic implements IGraphOperation {
         return s;
     }
 
-    public Set<Integer> tryMinimal2(UndirectedSparseGraphTO<Integer, Integer> graphRead,
+    public Set<Integer> tryMinimal2(GraphTO<Integer, Integer> graphRead,
             Set<Integer> tmp) {
         Set<Integer> s = tmp;
         List<Integer> ltmp = new ArrayList<>(tmp);

@@ -1,6 +1,5 @@
 package com.github.braully.graph.operation;
-import com.github.braully.graph.UndirectedSparseGraphTO;
-import com.github.braully.graph.WeightedUndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +9,7 @@ public class DaniloWeightedGraphNewOperationTest implements IGraphOperation {
     static final String description = "Ponderado";
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Map<String, Object> response = new HashMap<>();
 
         if(graph.edgeWeights.size() != graph.getEdgeCount()){

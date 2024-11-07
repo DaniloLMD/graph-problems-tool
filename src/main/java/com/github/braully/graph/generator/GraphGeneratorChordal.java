@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.Map;
 import java.util.Collection;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class GraphGeneratorChordal extends AbstractGraphGenerator {
     static final String[] parameters = {STRING_EDGES};
     static final String description = "Chordal Graph from Any Graph";
 
-    void max_card_search (UndirectedSparseGraphTO<Integer, Integer> graph, int[] ord, int[] vert){
+    void max_card_search (GraphTO<Integer, Integer> graph, int[] ord, int[] vert){
         int nvertices = graph.getVertexCount();
         int i, j, v, w;
         ArrayList <Integer> vertices = new ArrayList <Integer>(graph.getVertices());
@@ -72,7 +72,7 @@ public class GraphGeneratorChordal extends AbstractGraphGenerator {
     }
 
     // Adds fill in edges to a graph based on its vertex ordenation
-    void fill_in(UndirectedSparseGraphTO<Integer, Integer> graph, int[] ord, int[] vert){
+    void fill_in(GraphTO<Integer, Integer> graph, int[] ord, int[] vert){
         int nvertices = graph.getVertexCount();
         int v, w, x, i;
         ArrayList <Integer> vertices = new ArrayList <Integer>(graph.getVertices());
@@ -131,11 +131,11 @@ public class GraphGeneratorChordal extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
 
         String strEdges = getStringParameter(parameters, STRING_EDGES);
 
-        UndirectedSparseGraphTO<Integer, Integer> graph = new UndirectedSparseGraphTO<>();
+        GraphTO<Integer, Integer> graph = new GraphTO<>();
         graph.setName("Chordal");
 
         graph.addEdgesFromString(strEdges);

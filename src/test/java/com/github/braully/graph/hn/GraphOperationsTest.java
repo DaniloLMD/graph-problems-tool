@@ -6,7 +6,7 @@
 package com.github.braully.graph.hn;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.operation.GraphCaratheodoryHeuristicHybrid;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,12 +23,12 @@ public class GraphOperationsTest extends TestCase {
             + "	\"pairs\": [ [ 14, 5 ], [ 14, 8 ], [ 13, 4 ], [ 13, 1 ], [ 12, 5 ], [ 12, 12 ], [ 11, 5 ], [ 11, 3 ], [ 10, 1 ], [ 10, 2 ], [ 9, 3 ], [ 9, 2 ], [ 8, 1 ], [ 8, 11 ], [ 7, 7 ], [ 7, 13 ], [ 6, 0 ], [ 6, 4 ], [ 5, 9 ], [ 5, 10 ], [ 4, 2 ], [ 3, 3 ], [ 3, 0 ], [ 2, 6 ], [ 2, 0 ], [ 1, 12 ], [ 1, 4 ]],"
             + "	\"degrees\": [ 3, 5, 5, 4, 4, 5, 3, 2, 3, 3, 3, 3, 3, 3, 2], \"edgeCount\": 27,	\"vertexCount\": 15}";
 
-    UndirectedSparseGraphTO graph = null;
+    GraphTO graph = null;
 
     @Override
     protected void setUp() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        graph = mapper.readValue(jsonRequest, UndirectedSparseGraphTO.class);
+        graph = mapper.readValue(jsonRequest, GraphTO.class);
         super.setUp();
     }
 

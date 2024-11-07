@@ -5,7 +5,7 @@
  */
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -127,7 +127,7 @@ public abstract class AbstractHeuristicOptm extends AbstractHeuristic {
     }
 
     public int addVertToAux(Integer verti,
-            UndirectedSparseGraphTO<Integer, Integer> graph,
+            GraphTO<Integer, Integer> graph,
             int[] aux) {
         int countIncluded = 0;
         if (verti == null) {
@@ -155,7 +155,7 @@ public abstract class AbstractHeuristicOptm extends AbstractHeuristic {
     }
 
     public int addVertToS(Integer verti, Set<Integer> s,
-            UndirectedSparseGraphTO<Integer, Integer> graph,
+            GraphTO<Integer, Integer> graph,
             int[] aux) {
         int countIncluded = 0;
         if (verti == null) {
@@ -198,7 +198,7 @@ public abstract class AbstractHeuristicOptm extends AbstractHeuristic {
         return countIncluded;
     }
 
-    public Set<Integer> tipDecomp(UndirectedSparseGraphTO graph) {
+    public Set<Integer> tipDecomp(GraphTO graph) {
         Set<Integer> S = new LinkedHashSet<>(graph.getVertices());
 //        initKr(graph);
         int n = (Integer) graph.maxVertex() + 1;
@@ -246,7 +246,7 @@ public abstract class AbstractHeuristicOptm extends AbstractHeuristic {
     }
 
 //    @Override
-    public Set<Integer> podaBasica(UndirectedSparseGraphTO graph) {
+    public Set<Integer> podaBasica(GraphTO graph) {
         podados = new LinkedHashSet<>();
         Set<Integer> verticesTrabalhados = new LinkedHashSet<>(verticesTrabalho);
         //        initKr(graph);
@@ -301,7 +301,7 @@ public abstract class AbstractHeuristicOptm extends AbstractHeuristic {
         return verticesTrabalho;
     }
 
-    public Set<Integer> podaProfunda(UndirectedSparseGraphTO graph) {
+    public Set<Integer> podaProfunda(GraphTO graph) {
         podados = new LinkedHashSet<>();
         Set<Integer> verticesTrabalhados = new LinkedHashSet<>(verticesTrabalho);
         //        initKr(graph);
@@ -362,7 +362,7 @@ public abstract class AbstractHeuristicOptm extends AbstractHeuristic {
         return verticesTrabalho;
     }
 
-    protected Collection<Integer> getNeighborsNaoPodados(UndirectedSparseGraphTO<Integer, Integer> graph, Integer v) {
+    protected Collection<Integer> getNeighborsNaoPodados(GraphTO<Integer, Integer> graph, Integer v) {
         Collection<Integer> neighborsUnprotected = graph.getNeighborsUnprotected(v);
         if (!realizarPoda) {
             return neighborsUnprotected;
@@ -378,7 +378,7 @@ public abstract class AbstractHeuristicOptm extends AbstractHeuristic {
         this.realizarPoda = realizarPoda;
     }
 
-    protected void findCenterOfGraph(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    protected void findCenterOfGraph(GraphTO<Integer, Integer> graph) {
         Collection<Integer> vertices = graph.getVertices();
         int vertexCount = (Integer) graph.maxVertex() + 1;
         bdlhs = BFSUtil.newBfsUtilSimple(vertexCount + 1);
@@ -386,7 +386,7 @@ public abstract class AbstractHeuristicOptm extends AbstractHeuristic {
         findCenterOfGraph(vertices, graph);
     }
 
-    protected void findCenterOfGraph(Collection<Integer> vertices, UndirectedSparseGraphTO<Integer, Integer> graph) {
+    protected void findCenterOfGraph(Collection<Integer> vertices, GraphTO<Integer, Integer> graph) {
 
         while (bdlhs.discored < vertices.size()) {
             Integer maior = null;
@@ -491,7 +491,7 @@ public abstract class AbstractHeuristicOptm extends AbstractHeuristic {
         return ret;
     }
 
-    public List<Integer> getVertices(UndirectedSparseGraphTO<Integer, Integer> graphRead) {
+    public List<Integer> getVertices(GraphTO<Integer, Integer> graphRead) {
         List<Integer> vertices = new ArrayList<>((List<Integer>) graphRead.getVertices());
         if (sortByDegree) {
             vertices.sort(Comparator
@@ -502,7 +502,7 @@ public abstract class AbstractHeuristicOptm extends AbstractHeuristic {
         return vertices;
     }
 
-    public Set<Integer> tryMinimal2Medium(UndirectedSparseGraphTO<Integer, Integer> graphRead,
+    public Set<Integer> tryMinimal2Medium(GraphTO<Integer, Integer> graphRead,
             Set<Integer> tmp) {
         int contVizinhoComum = 0;
         int contSemVizinhoComum = 0;

@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,7 +23,7 @@ public class GraphCaratheodoryCheckSet implements IGraphOperation {
 
     public static boolean verbose = false;
 
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graphRead) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graphRead) {
         long totalTimeMillis = -1;
         Collection<Integer> set = graphRead.getSet();
 
@@ -47,7 +47,7 @@ public class GraphCaratheodoryCheckSet implements IGraphOperation {
         return response;
     }
 
-    public OperationConvexityGraphResult hsp3(UndirectedSparseGraphTO<Integer, Integer> graph,
+    public OperationConvexityGraphResult hsp3(GraphTO<Integer, Integer> graph,
             int[] currentSet) {
         OperationConvexityGraphResult processedHullSet = null;
         processedHullSet = hsp3aux(graph, currentSet);
@@ -57,7 +57,7 @@ public class GraphCaratheodoryCheckSet implements IGraphOperation {
         return processedHullSet;
     }
 
-    public OperationConvexityGraphResult hsp3aux(UndirectedSparseGraphTO<Integer, Integer> graph, int[] currentSet) {
+    public OperationConvexityGraphResult hsp3aux(GraphTO<Integer, Integer> graph, int[] currentSet) {
         int currentSetSize = 0;
         OperationConvexityGraphResult processedHullSet = null;
         Set<Integer> hsp3g = new HashSet<>();
@@ -140,7 +140,7 @@ public class GraphCaratheodoryCheckSet implements IGraphOperation {
         return processedHullSet;
     }
 
-    public OperationConvexityGraphResult hsp3aux(UndirectedSparseGraphTO<Integer, Integer> graph, Integer[] currentSet) {
+    public OperationConvexityGraphResult hsp3aux(GraphTO<Integer, Integer> graph, Integer[] currentSet) {
         int currentSetSize = 0;
         OperationConvexityGraphResult processedHullSet = null;
         Set<Integer> hsp3g = new HashSet<>();
@@ -233,7 +233,7 @@ public class GraphCaratheodoryCheckSet implements IGraphOperation {
      */
     public int maxp = 0;
 
-    public Set<Integer> calcDerivatedPartial(UndirectedSparseGraphTO<Integer, Integer> graph,
+    public Set<Integer> calcDerivatedPartial(GraphTO<Integer, Integer> graph,
             Set<Integer> hsp3g, int[] currentSet) {
         Set<Integer> partial = new HashSet<>();
         Queue<Integer> mustBeIncluded = new ArrayDeque<>();
@@ -279,7 +279,7 @@ public class GraphCaratheodoryCheckSet implements IGraphOperation {
         return partial;
     }
 
-    public Set<Integer> calcDerivatedPartial(UndirectedSparseGraphTO<Integer, Integer> graph,
+    public Set<Integer> calcDerivatedPartial(GraphTO<Integer, Integer> graph,
             Set<Integer> hsp3g, Integer[] currentSet) {
         Set<Integer> partial = new HashSet<>();
         Queue<Integer> mustBeIncluded = new ArrayDeque<>();
@@ -311,7 +311,7 @@ public class GraphCaratheodoryCheckSet implements IGraphOperation {
         return partial;
     }
 
-    public Set<Integer> calcDerivatedPartial(UndirectedSparseGraphTO<Integer, Integer> graph,
+    public Set<Integer> calcDerivatedPartial(GraphTO<Integer, Integer> graph,
             Set<Integer> hsp3g, Set<Integer> currentSet) {
         Set<Integer> partial = new HashSet<>();
         Queue<Integer> mustBeIncluded = new ArrayDeque<>();
@@ -343,7 +343,7 @@ public class GraphCaratheodoryCheckSet implements IGraphOperation {
         return partial;
     }
 
-    public OperationConvexityGraphResult hsp3(UndirectedSparseGraphTO<Integer, Integer> graphRead, Collection<Integer> set) {
+    public OperationConvexityGraphResult hsp3(GraphTO<Integer, Integer> graphRead, Collection<Integer> set) {
         int[] arr = new int[set.size()];
         int i = 0;
         for (Integer v : set) {
@@ -353,7 +353,7 @@ public class GraphCaratheodoryCheckSet implements IGraphOperation {
         return hsp3(graphRead, arr);
     }
 
-    public boolean isCaratheodorySet(UndirectedSparseGraphTO<Integer, Integer> graphRead,
+    public boolean isCaratheodorySet(GraphTO<Integer, Integer> graphRead,
             Set<Integer> buildMaxCaratheodorySet) {
         OperationConvexityGraphResult processedHullSet = hsp3(graphRead, buildMaxCaratheodorySet);
         return processedHullSet != null && processedHullSet.partial != null && !processedHullSet.partial.isEmpty();

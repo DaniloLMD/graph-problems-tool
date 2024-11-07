@@ -1,6 +1,5 @@
 package com.github.braully.graph.operation;
-import com.github.braully.graph.UndirectedSparseGraphTO;
-import com.github.braully.graph.WeightedUndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ public class DaniloDirectedWeightedGraphNewOperationTest implements IGraphOperat
     static final String description = "Direcionado e Ponderado";
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Map<String, Object> response = new HashMap<>();
 
         if(!graph.isDirected){

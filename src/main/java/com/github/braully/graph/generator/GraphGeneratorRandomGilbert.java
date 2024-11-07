@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.Map;
 
 public class GraphGeneratorRandomGilbert extends AbstractGraphGenerator {
@@ -25,7 +25,7 @@ public class GraphGeneratorRandomGilbert extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         Integer nvertices = getIntegerParameter(parameters, N_VERTICES);
         Double probability = getDoubleParameter(parameters, PROBABILITY);
 
@@ -35,13 +35,13 @@ public class GraphGeneratorRandomGilbert extends AbstractGraphGenerator {
         if (probability == null) {
             probability = DEFAULT_PROBABILITY;
         }
-        UndirectedSparseGraphTO<Integer, Integer> graph = generate(nvertices, probability);
+        GraphTO<Integer, Integer> graph = generate(nvertices, probability);
 
         return graph;
     }
 
-    public UndirectedSparseGraphTO<Integer, Integer> generate(Integer nvertices, Double probability) {
-        UndirectedSparseGraphTO<Integer, Integer> graph = new UndirectedSparseGraphTO<>();
+    public GraphTO<Integer, Integer> generate(Integer nvertices, Double probability) {
+        GraphTO<Integer, Integer> graph = new GraphTO<>();
         graph.setName("G(" + nvertices + "," + probability + ")");
         Integer[] vertexs = new Integer[nvertices];
         for (int i = 0; i < nvertices; i++) {

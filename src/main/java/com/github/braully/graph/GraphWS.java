@@ -145,7 +145,7 @@ public class GraphWS {
 
     @ResponseBody
     @RequestMapping("open-graph")
-    public UndirectedSparseGraphTO<Integer, Integer> openGraphSaved(@RequestParam Map<String, String> allRequestParams) {
+    public GraphTO<Integer, Integer> openGraphSaved(@RequestParam Map<String, String> allRequestParams) {
         Map<String, String> params = allRequestParams;
         String nameGraph = params.get("graph");
         AbstractGraph<Integer, Integer> graph = null;
@@ -160,12 +160,12 @@ public class GraphWS {
                 logWebconsole.info("Graph " + nameGraph + " lodaded");
             }
         }
-        return (UndirectedSparseGraphTO) graph;
+        return (GraphTO) graph;
     }
 
     @ResponseBody
     @RequestMapping("generate-graph")
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(@RequestParam Map<String, String> allRequestParams) {
+    public GraphTO<Integer, Integer> generateGraph(@RequestParam Map<String, String> allRequestParams) {
         Map<String, String> params = allRequestParams;
         String typeGraph = params.get("key");
         AbstractGraph<Integer, Integer> graph = null;
@@ -186,7 +186,7 @@ public class GraphWS {
             }
         }
 
-        return (UndirectedSparseGraphTO) graph;
+        return (GraphTO) graph;
     }
 
 //    Map<String, String> getTranslageParams(MultivaluedMap<String, String> multiParams) {
@@ -219,7 +219,7 @@ public class GraphWS {
     public void downloadGraphCsr(String jsonGraph) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            UndirectedSparseGraphTO graph = mapper.readValue(jsonGraph, UndirectedSparseGraphTO.class
+            GraphTO graph = mapper.readValue(jsonGraph, GraphTO.class
             );
 
 
@@ -241,7 +241,7 @@ public class GraphWS {
     public void downloadGraphMat(String jsonGraph) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            UndirectedSparseGraphTO graph = mapper.readValue(jsonGraph, UndirectedSparseGraphTO.class
+            GraphTO graph = mapper.readValue(jsonGraph, GraphTO.class
             );
 
             if (graph != null) {
@@ -268,7 +268,7 @@ public class GraphWS {
 
         try {
             ObjectMapper mapper = new ObjectMapper();
-            UndirectedSparseGraphTO graph = mapper.readValue(jsonGraph, UndirectedSparseGraphTO.class
+            GraphTO graph = mapper.readValue(jsonGraph, GraphTO.class
             );  
 
 
@@ -312,7 +312,7 @@ public class GraphWS {
         Map<String, Object> result = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            UndirectedSparseGraphTO graph = mapper.readValue(jsonGraph, UndirectedSparseGraphTO.class);
+            GraphTO graph = mapper.readValue(jsonGraph, GraphTO.class);
 
             IGraphOperation operation = null;
             if (graph != null && operators != null && graph.getOperation() != null) {
@@ -331,9 +331,9 @@ public class GraphWS {
 
                     if (operation != null) {
                         executeOperation = new ExecuteOperation();
-                        List<UndirectedSparseGraphTO> batchs = DatabaseFacade.getAllGraphsBatchDiretory();
+                        List<GraphTO> batchs = DatabaseFacade.getAllGraphsBatchDiretory();
                         if (batchs != null && !batchs.isEmpty()) {
-                            for (UndirectedSparseGraphTO g : batchs) {
+                            for (GraphTO g : batchs) {
                                 executeOperation.addGraph(g);
                             }
                             executeOperation.setGraphOperation(operation);
@@ -411,9 +411,9 @@ public class GraphWS {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public UndirectedSparseGraphTO<Integer, Integer> uploadFileGraph(@RequestParam("file") MultipartFile file) {
+    public GraphTO<Integer, Integer> uploadFileGraph(@RequestParam("file") MultipartFile file) {
 //    public ResponseEntity<?> uploadFileGraph(@RequestParam("file") MultipartFile file) {
-        UndirectedSparseGraphTO<Integer, Integer> ret = null;
+        GraphTO<Integer, Integer> ret = null;
 //        String fName = file.getName();
         String fName = file.getOriginalFilename();
         try {

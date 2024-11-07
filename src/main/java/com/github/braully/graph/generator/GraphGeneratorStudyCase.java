@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import com.github.braully.graph.operation.GraphHullSetNC;
 import com.github.braully.graph.operation.GraphSubgraph;
@@ -38,7 +38,7 @@ public class GraphGeneratorStudyCase extends AbstractGraphGenerator {
     static String DEFAULT_INNER = "22,";
 //    static String DEFAULT_GRAPH = "esqueleto-grafo-moore-50.es";
     static String DEFAULT_GRAPH = "grafo-moore-50.es";
-    UndirectedSparseGraphTO<Integer, Integer> graphES = null;
+    GraphTO<Integer, Integer> graphES = null;
 
     @Override
     public String[] getParameters() {
@@ -51,7 +51,7 @@ public class GraphGeneratorStudyCase extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
 
         String cycle = getStringParameter(parameters, CYCLE);
         String inner = getStringParameter(parameters, INNER);
@@ -135,7 +135,7 @@ public class GraphGeneratorStudyCase extends AbstractGraphGenerator {
             angulo += anguloOff;
         }
 
-        UndirectedSparseGraphTO<Integer, Integer> graph = subGrapOp.subGraphInduced(graphES, subSet);
+        GraphTO<Integer, Integer> graph = subGrapOp.subGraphInduced(graphES, subSet);
 //        graph.setPositionX(xs);
 //        graph.setPositionY(ys);
         return graph;

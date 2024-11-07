@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import com.github.braully.graph.operation.IGraphOperation;
 
@@ -39,7 +39,7 @@ public class GraphHNV
     public GraphHNV() {
     }
 
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Integer hullNumber = 0;
         Set<Integer> minHullSet = null;
 
@@ -70,7 +70,7 @@ public class GraphHNV
         return response;
     }
 
-    public Set<Integer> findMinHullSetGraph(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Set<Integer> findMinHullSetGraph(GraphTO<Integer, Integer> graph) {
         return buildOptimizedHullSet(graph);
 
     }
@@ -94,7 +94,7 @@ public class GraphHNV
     int[] auxb = null;
 
     @Override
-    public List<Integer> getVertices(UndirectedSparseGraphTO<Integer, Integer> graphRead) {
+    public List<Integer> getVertices(GraphTO<Integer, Integer> graphRead) {
         List<Integer> vertices = new ArrayList<>((List<Integer>) graphRead.getVertices());
         vertices.sort(Comparator
                 .comparingInt((Integer v) -> -graphRead.degree(v))
@@ -103,7 +103,7 @@ public class GraphHNV
         return vertices;
     }
 
-    public Set<Integer> buildOptimizedHullSet(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Set<Integer> buildOptimizedHullSet(GraphTO<Integer, Integer> graph) {
         List<Integer> vertices = getVertices(graph);
         Set<Integer> hullSet = new LinkedHashSet<>();
         Set<Integer> s = new LinkedHashSet<>();
@@ -254,7 +254,7 @@ public class GraphHNV
     int menorT = Integer.MAX_VALUE;
     int tamanhoReduzido = 0;
 
-    public Set<Integer> tryMinimal(UndirectedSparseGraphTO<Integer, Integer> graphRead,
+    public Set<Integer> tryMinimal(GraphTO<Integer, Integer> graphRead,
             Set<Integer> tmp, int tamanhoAlvo) {
         Set<Integer> s = tmp;
 
@@ -332,7 +332,7 @@ public class GraphHNV
     }
 //    int tamanhoReduzido = 0;
 
-    public Set<Integer> tryMinimal2Lite(UndirectedSparseGraphTO<Integer, Integer> graphRead,
+    public Set<Integer> tryMinimal2Lite(GraphTO<Integer, Integer> graphRead,
             Set<Integer> tmp, int tamanhoAlvo) {
         Set<Integer> s = tmp;
         if (s.size() <= 2) {

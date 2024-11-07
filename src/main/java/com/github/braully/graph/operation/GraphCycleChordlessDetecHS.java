@@ -1,7 +1,7 @@
 package com.github.braully.graph.operation;
 
 import com.github.braully.graph.GraphWS;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,7 +24,7 @@ public class GraphCycleChordlessDetecHS implements IGraphOperation {
     protected GraphHullNumber hullNumber = new GraphHullNumber();
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         /* Processar a buscar pelo hullset e hullnumber */
         Map<String, Object> response = new HashMap<>();
         Integer size = null;
@@ -54,7 +54,7 @@ public class GraphCycleChordlessDetecHS implements IGraphOperation {
         return response;
     }
 
-    public List<Integer> findCycleBruteForce(UndirectedSparseGraphTO<Integer, Integer> graph, int currentSize) {
+    public List<Integer> findCycleBruteForce(GraphTO<Integer, Integer> graph, int currentSize) {
         List<Integer> vertices = (List<Integer>) graph.getVertices();
         List<Integer> cycle = null;
         int veticesCount = vertices.size();
@@ -116,7 +116,7 @@ public class GraphCycleChordlessDetecHS implements IGraphOperation {
     }
 
     //https://www.geeksforgeeks.org/detect-cycle-in-an-undirected-graph-using-bfs/
-    public boolean isChordlessCycle(UndirectedSparseGraphTO<Integer, Integer> graph, int[] currentSet) {
+    public boolean isChordlessCycle(GraphTO<Integer, Integer> graph, int[] currentSet) {
         boolean ret = false;
 
         return ret;

@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import edu.uci.ics.jung.graph.util.Pair;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,13 +35,13 @@ public class GraphGeneratorMoore extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         Integer k = getIntegerParameter(parameters, K_REGULAR);
 
         if (k == null) {
             k = DEFAULT_NVERTICES;
         }
-        UndirectedSparseGraphTO<Integer, Integer> graph = new UndirectedSparseGraphTO<>();
+        GraphTO<Integer, Integer> graph = new GraphTO<>();
 
         if (ks.contains(k)) {
             graph.setName("K" + K_REGULAR);
@@ -194,7 +194,7 @@ public class GraphGeneratorMoore extends AbstractGraphGenerator {
         return arr;
     }
 
-    private void completeEdges(UndirectedSparseGraphTO<Integer, Integer> graph, Integer k) {
+    private void completeEdges(GraphTO<Integer, Integer> graph, Integer k) {
         Collection<Integer> vertices = graph.getVertices();
         int numvert = vertices.size();
         List<Integer> incompletVertices = new ArrayList<>();
@@ -216,7 +216,7 @@ public class GraphGeneratorMoore extends AbstractGraphGenerator {
             pos[i] = 0;
         }
 
-        UndirectedSparseGraphTO lastgraph = graph.clone();
+        GraphTO lastgraph = graph.clone();
         List<Integer> poss = new ArrayList<>();
         List<Integer> bestVals = new ArrayList<>();
         Integer[] bfsTmp = new Integer[numvert];
@@ -314,7 +314,7 @@ public class GraphGeneratorMoore extends AbstractGraphGenerator {
         System.out.println(edgeString);
     }
 
-    public void sincronizarListaPossibilidades(Integer[] bfs, UndirectedSparseGraphTO lastgraph, Integer k, List<Integer> poss, Integer v) {
+    public void sincronizarListaPossibilidades(Integer[] bfs, GraphTO lastgraph, Integer k, List<Integer> poss, Integer v) {
         poss.clear();
         bfs(lastgraph, bfs, v);
         for (Integer i = 0; i < bfs.length; i++) {
@@ -324,7 +324,7 @@ public class GraphGeneratorMoore extends AbstractGraphGenerator {
         }
     }
 
-    public void bfs(UndirectedSparseGraphTO<Integer, Integer> subgraph, Integer[] bfs, Integer v) {
+    public void bfs(GraphTO<Integer, Integer> subgraph, Integer[] bfs, Integer v) {
         for (int i = 0; i < bfs.length; i++) {
             bfs[i] = null;
         }
@@ -332,7 +332,7 @@ public class GraphGeneratorMoore extends AbstractGraphGenerator {
         visitVertex(v, bfs, subgraph);
     }
 
-    public void visitVertex(Integer v, Integer[] bfs, UndirectedSparseGraphTO<Integer, Integer> subgraph1) {
+    public void visitVertex(Integer v, Integer[] bfs, GraphTO<Integer, Integer> subgraph1) {
         queue.clear();
         queue.add(v);
         while (!queue.isEmpty()) {
@@ -351,7 +351,7 @@ public class GraphGeneratorMoore extends AbstractGraphGenerator {
         }
     }
 
-    void revisitVertex(Integer hold, Integer[] bfs3, UndirectedSparseGraphTO<Integer, Integer> subgraph) {
+    void revisitVertex(Integer hold, Integer[] bfs3, GraphTO<Integer, Integer> subgraph) {
         if (hold == null || bfs3[hold] != 0) {
             throw new IllegalStateException("BFS From another root");
         }
@@ -364,7 +364,7 @@ public class GraphGeneratorMoore extends AbstractGraphGenerator {
         }
     }
 
-    void rollback(int[] pos, Deque<Integer> stack, UndirectedSparseGraphTO graph) {
+    void rollback(int[] pos, Deque<Integer> stack, GraphTO graph) {
         for (int i = stack.size(); i < pos.length; i++) {
             pos[i] = 0;
         }

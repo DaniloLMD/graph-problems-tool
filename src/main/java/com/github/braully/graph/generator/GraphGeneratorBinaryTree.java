@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.ArrayDeque;
 import java.util.Map;
 import java.util.Queue;
@@ -21,7 +21,7 @@ public class GraphGeneratorBinaryTree extends AbstractGraphGenerator {
         return description;
     }
 
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         Integer nvertices = getIntegerParameter(parameters, N_VERTICES);
 
         if (nvertices == null) {
@@ -31,7 +31,7 @@ public class GraphGeneratorBinaryTree extends AbstractGraphGenerator {
         double lognv = Math.log(nvertices + 1) / Math.log(2);
         double pow = Math.pow(2, Math.ceil(lognv)) - 1;
         int nvert = (int) pow;
-        UndirectedSparseGraphTO<Integer, Integer> graph = new UndirectedSparseGraphTO<>();
+        GraphTO<Integer, Integer> graph = new GraphTO<>();
         graph.setName("T" + nvertices);
 
         Queue<Integer> frontier = new ArrayDeque<>();

@@ -1,7 +1,7 @@
 package com.github.braully.graph.operation;
 
 import com.github.braully.graph.GraphWS;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,7 +34,7 @@ public class GraphTSSGreedy extends AbstractHeuristic implements IGraphOperation
     }
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
 //        Set<Integer> setN = new HashSet<>();
 //        setN.addAll(graph.getSet());
         String inputData = graph.getInputData();
@@ -56,11 +56,11 @@ public class GraphTSSGreedy extends AbstractHeuristic implements IGraphOperation
         return response;
     }
 
-    public Set<Integer> tssGreedy(UndirectedSparseGraphTO graph) {
+    public Set<Integer> tssGreedy(GraphTO graph) {
         return tssGreedy(graph, null);
     }
 
-    public Set<Integer> tssGreedy(UndirectedSparseGraphTO graph, List<Integer> reqList) {
+    public Set<Integer> tssGreedy(GraphTO graph, List<Integer> reqList) {
         Set<Integer> S = new LinkedHashSet<>();
         Set<Integer> U = new LinkedHashSet<>(graph.getVertices());
         initKr(graph);

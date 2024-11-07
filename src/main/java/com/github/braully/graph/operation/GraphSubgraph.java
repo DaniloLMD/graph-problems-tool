@@ -1,7 +1,7 @@
 package com.github.braully.graph.operation;
 
 import com.github.braully.graph.GraphWS;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,13 +18,13 @@ public class GraphSubgraph implements IGraphOperation {
     private static final Logger log = Logger.getLogger(GraphWS.class);
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Set<Integer> setN = new HashSet<>();
         setN.addAll(graph.getSet());
 
         /* Processar a buscar pelo hullset e hullnumber */
         Map<String, Object> response = new HashMap<>();
-        UndirectedSparseGraphTO subgraph = subGraphInduced(graph, setN);
+        GraphTO subgraph = subGraphInduced(graph, setN);
 
         try {
             response.put("Subgraph", "N" + subgraph.getVertexCount() + ",M" + subgraph.getEdgeCount());
@@ -35,8 +35,8 @@ public class GraphSubgraph implements IGraphOperation {
         return response;
     }
 
-    public UndirectedSparseGraphTO subGraphInduced(UndirectedSparseGraphTO graph, Collection<Integer> setN) {
-        UndirectedSparseGraphTO subgraph = new UndirectedSparseGraphTO();
+    public GraphTO subGraphInduced(GraphTO graph, Collection<Integer> setN) {
+        GraphTO subgraph = new GraphTO();
 
         for (Integer v : setN) {
             subgraph.addVertex(v);

@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.Map;
 
 public class GraphGeneratorCycle extends GraphGeneratorPath {
@@ -13,7 +13,7 @@ public class GraphGeneratorCycle extends GraphGeneratorPath {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         Integer nvertices = getIntegerParameter(parameters, N_VERTICES);
 
         if (nvertices == null) {
@@ -22,8 +22,8 @@ public class GraphGeneratorCycle extends GraphGeneratorPath {
         return generateCycleGraph(nvertices);
     }
 
-    public UndirectedSparseGraphTO<Integer, Integer> generateCycleGraph(Integer nvertices) {
-        UndirectedSparseGraphTO<Integer, Integer> graph = super.generatePathGraph(nvertices);
+    public GraphTO<Integer, Integer> generateCycleGraph(Integer nvertices) {
+        GraphTO<Integer, Integer> graph = super.generatePathGraph(nvertices);
 
         graph.setName("C" + nvertices);
         graph.addEdge(graph.getEdgeCount(), graph.getVertexCount() - 1, 0);

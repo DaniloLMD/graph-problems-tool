@@ -1,7 +1,7 @@
 package com.github.braully.graph.operation;
 
 import com.github.braully.graph.GraphWS;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import edu.uci.ics.jung.algorithms.shortestpath.BFSDistanceLabeler;
 import edu.uci.ics.jung.algorithms.shortestpath.DistanceStatistics;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class GraphStatistics implements IGraphOperation {
     private static final Logger log = Logger.getLogger(GraphWS.class);
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         /* Processar a buscar pelo hullset e hullnumber */
         Map<String, Object> response = new HashMap<>();
         try {
@@ -51,7 +51,7 @@ public class GraphStatistics implements IGraphOperation {
         return response;
     }
 
-    public void basicstats(UndirectedSparseGraphTO<Integer, Integer> graph, Map<String, Object> response) {
+    public void basicstats(GraphTO<Integer, Integer> graph, Map<String, Object> response) {
         int Lambda = 0, lambda = Integer.MAX_VALUE;
         for (Integer i : (Collection<Integer>) graph.getVertices()) {
             lambda = Math.min(lambda, graph.getNeighborCount(i));
@@ -68,7 +68,7 @@ public class GraphStatistics implements IGraphOperation {
     https://stackoverflow.com/questions/12890106/find-the-girth-of-a-graph
     
      */
-    public int girth(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public int girth(GraphTO<Integer, Integer> graph) {
         class Node {
 
             public int vertex, depth;
@@ -155,12 +155,12 @@ public class GraphStatistics implements IGraphOperation {
         return description;
     }
 
-    public double diameter(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public double diameter(GraphTO<Integer, Integer> graph) {
         DistanceStatistics distanceStatistics = new DistanceStatistics();
         return distanceStatistics.diameter(graph);
     }
 
-    public int numConnectedComponents(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public int numConnectedComponents(GraphTO<Integer, Integer> graph) {
         int ret = 0;
         BFSDistanceLabeler<Integer, Integer> bdl = new BFSDistanceLabeler<>();
         if (graph != null && graph.getVertexCount() > 0) {
@@ -180,7 +180,7 @@ public class GraphStatistics implements IGraphOperation {
         return ret;
     }
 
-    public int bigDelta(UndirectedSparseGraphTO clone) {
+    public int bigDelta(GraphTO clone) {
         int Lambda = 0, lambda = Integer.MAX_VALUE;
         for (Integer i : (Collection<Integer>) clone.getVertices()) {
             lambda = Math.min(lambda, clone.getNeighborCount(i));

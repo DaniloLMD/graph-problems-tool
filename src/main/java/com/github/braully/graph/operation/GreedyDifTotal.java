@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,7 +39,7 @@ public class GreedyDifTotal
     public GreedyDifTotal() {
     }
 
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Integer hullNumber = 0;
         Set<Integer> minHullSet = null;
 
@@ -85,7 +85,7 @@ public class GreedyDifTotal
     //has uncontaminated vertices on the current component
     protected boolean hasVerticesOnCC = false;
 
-    public Set<Integer> buildTargeSet(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Set<Integer> buildTargeSet(GraphTO<Integer, Integer> graph) {
         if (graph == null) {
             return null;
         }
@@ -238,7 +238,7 @@ public class GreedyDifTotal
     }
 
     public int addVertToAux(Integer verti,
-            UndirectedSparseGraphTO<Integer, Integer> graph,
+            GraphTO<Integer, Integer> graph,
             int[] aux) {
         int countIncluded = 0;
         if (verti == null) {
@@ -266,7 +266,7 @@ public class GreedyDifTotal
     }
 
     public int addVertToS(Integer verti, Set<Integer> s,
-            UndirectedSparseGraphTO<Integer, Integer> graph,
+            GraphTO<Integer, Integer> graph,
             int[] aux) {
         int countIncluded = 0;
         if (verti == null) {
@@ -311,7 +311,7 @@ public class GreedyDifTotal
 
     protected int[] scount = null;
 
-    public Set<Integer> refineResultStep1(UndirectedSparseGraphTO<Integer, Integer> graphRead,
+    public Set<Integer> refineResultStep1(GraphTO<Integer, Integer> graphRead,
             Set<Integer> tmp, int tamanhoAlvo) {
         Set<Integer> s = new LinkedHashSet<>(tmp);
 
@@ -330,7 +330,7 @@ public class GreedyDifTotal
         return s;
     }
 
-    public Set<Integer> refineResultStep2(UndirectedSparseGraphTO<Integer, Integer> graphRead,
+    public Set<Integer> refineResultStep2(GraphTO<Integer, Integer> graphRead,
             Set<Integer> tmp, int tamanhoAlvo) {
         Set<Integer> s = tmp;
 
@@ -396,7 +396,7 @@ public class GreedyDifTotal
         return s;
     }
 
-    public Set<Integer> refineResult(UndirectedSparseGraphTO<Integer, Integer> graph, Set<Integer> s, int targetSize) {
+    public Set<Integer> refineResult(GraphTO<Integer, Integer> graph, Set<Integer> s, int targetSize) {
         s = refineResultStep1(graph, s, targetSize);
 //        s = refineResultStep2(graph, s, targetSize);
         return s;
@@ -404,7 +404,7 @@ public class GreedyDifTotal
 
     public static void main(String... args) throws IOException {
         System.out.println("Execution Sample: Livemocha database R=2");
-        UndirectedSparseGraphTO<Integer, Integer> graph = null;
+        GraphTO<Integer, Integer> graph = null;
         GreedyDifTotal op = new GreedyDifTotal();
 
 //        URI urinode = URI.create("jar:file:data/big/all-big.zip!/Livemocha/nodes.csv");
