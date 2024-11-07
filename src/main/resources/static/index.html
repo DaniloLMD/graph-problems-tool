@@ -608,36 +608,36 @@
                                 //console.log('select: ');
                                 //console.log(d);
 
-                                var tgname = 'line.target-' + d.idname;
-                                var scname = 'line.source-' + d.idname;
+                                // var tgname = 'line.target-' + d.idname;
+                                // var scname = 'line.source-' + d.idname;
 
-                                if (selected_node !== null) {
-                                    if (selected_node === d) {
-                                        d3.selectAll('.last_selected').classed("last_selected", false);
-                                        d3.select(this).classed("node_selected", false);
-                                        d3.selectAll(scname).style("stroke-width", function (e) {
-                                            return --e.value;
-                                        });
-                                        d3.selectAll(tgname).style("stroke-width", function (e) {
-                                            return --e.value;
-                                        });
-                                        selected_node = null;
-                                        return;
-                                    }
-                                    //console.log(selected_node);
-                                    d3.selectAll('.last_selected').classed("last_selected", false);
-                                }
-                                selected_node = d;
-                                d3.select(this).classed("last_selected", true);
-                                if (!d3.select(this).classed("node_selected")) {
-                                    d3.select(this).classed("node_selected", true);
-                                    d3.selectAll(scname).style("stroke-width", function (e) {
-                                        return ++e.value;
-                                    });
-                                    d3.selectAll(tgname).style("stroke-width", function (e) {
-                                        return ++e.value;
-                                    });
-                                }
+                                // if (selected_node !== null) {
+                                //     if (selected_node === d) {
+                                //         d3.selectAll('.last_selected').classed("last_selected", false);
+                                //         d3.select(this).classed("node_selected", false);
+                                //         d3.selectAll(scname).style("stroke-width", function (e) {
+                                //             return --e.value;
+                                //         });
+                                //         d3.selectAll(tgname).style("stroke-width", function (e) {
+                                //             return --e.value;
+                                //         });
+                                //         selected_node = null;
+                                //         return;
+                                //     }
+                                //     //console.log(selected_node);
+                                //     d3.selectAll('.last_selected').classed("last_selected", false);
+                                // }
+                                // selected_node = d;
+                                // d3.select(this).classed("last_selected", true);
+                                // if (!d3.select(this).classed("node_selected")) {
+                                //     d3.select(this).classed("node_selected", true);
+                                //     d3.selectAll(scname).style("stroke-width", function (e) {
+                                //         return ++e.value;
+                                //     });
+                                //     d3.selectAll(tgname).style("stroke-width", function (e) {
+                                //         return ++e.value;
+                                //     });
+                                // }
                                 //console.log('ok');
                             }
 
