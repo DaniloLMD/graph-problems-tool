@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <!--References: http://bl.ocks.org/mbostock/4062045-->
@@ -359,6 +360,7 @@
                         $scope.downloadGraph = function () {
                             var filename = 'graph-' + $scope.graph.name + '.json';
                             var textContent = JSON.stringify($scope.graph, null, '\t');
+                            
                             var blob = new Blob([textContent], {type: "text/plain;charset=utf-8"});
                             saveAs(blob, filename);
                         };
@@ -442,6 +444,7 @@
                             var graph = $scope.graph;
                             var width = $("#grafo").width();
                             var height = $("#grafo").height();
+                            console.clear();
                             console.log('graph: ');
                             console.log(graph);
                             $("#grafo").html('');
@@ -461,6 +464,20 @@
                                     .append("svg")
                                     .attr("width", width)
                                     .attr("height", height);
+
+                            // Definição dos marcadores de seta
+                            svg.append("defs").append("marker")
+                                .attr("id", "arrow")
+                                .attr("viewBox", "0 -5 10 10")
+                                .attr("refX", 15) // Ajuste a posição da seta na extremidade da linha
+                                .attr("refY", 0)
+                                .attr("markerWidth", 10)
+                                .attr("markerHeight", 10)
+                                .attr("orient", "auto")
+                                .append("path")
+                                .attr("d", "M0,-5L10,0L0,5") // Desenho da seta
+                                .style("fill", "#8e8181"); // Cor da seta
+
 
                             var posX = d3.scale.linear()
                                     .range([0, width])
@@ -486,9 +503,8 @@
                                 d.cy = d.y;
                             });
 
-
                             var edges = graph.normalizedPairs.map(function (d) {
-                                return {"source": d[0], "target": d[1], "value": 1, "origin": d, "left": true, "right": true};
+                                return {"source": d[0], "target": d[1], "value": 1, "origin": d, "left": d[0] != d[1], "right": d[0] != d[1]};
                             });
 
 
@@ -500,7 +516,21 @@
                                     .attr("class", function (d) {
                                         return 'link ' + 'source-' + d.source.idname + ' target-' + d.target.idname;
                                     }).style("stroke-width", function (d) {
-                                return d.value;
+                                        return d.value;
+                            });
+                            if(graph.isDirected)
+                                    link.attr("marker-end", "url(#arrow)"); // Adiciona a seta na extremidade da aresta
+
+
+                            // Adiciona um texto para representar o peso de cada aresta
+                            var edgeLabels = svg.selectAll(".edgeLabel")
+                                .data(edges)
+                                .enter().append("text")
+                                .attr("class", "edgeLabel")
+                                .style("font-size", "12px")
+                                .style("fill", "#333")
+                                .text(function(d, i) {
+                                    return graph.weights[i] !== null ? graph.weights[i] : "";
                             });
 
                             var nodes = svg.selectAll(".node")
@@ -558,7 +588,15 @@
                                 }).attr("cy", function (d) {
                                     return d.y;
                                 });
+
+                                edgeLabels.attr("x", function(d) {
+                                    return (d.source.x + d.target.x) / 2;
+                                })
+                                .attr("y", function(d) {
+                                    return (d.source.y + d.target.y) / 2;
+                                });
                             });
+
                             function dblclick(d) {
                                 d3.select(this).classed("fixed", d.fixed = false);
                                 d3.select(this).classed("node_selected", false);
