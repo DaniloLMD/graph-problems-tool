@@ -108,12 +108,22 @@ int main(int argc, char** argv) {
             if(!visited[i]) dfs(i,i);            
         }
 
-        cout << "Tempo (Entrada, Saida) = {";
+        vector<pair<int , int>> ordem;
         for(int i = 0; i < N_vertices; i++){
-            cout << '(' << tin[i] << ", " << tout[i] << ")";
-            if(i+1 != N_vertices) cout << ", ";
+            ordem.push_back({tin[i], i});
         }
-        cout << "}\n";
+        
+        sort(ordem.begin(), ordem.end());
+
+        cout << "{";
+        for(int i = 0;i < N_vertices;i++) {
+            if(i + 1 != N_vertices) {
+                cout << ordem[i].second << " , ";
+            }else {
+                cout << ordem[i].second;
+            }
+        }
+        cout << "}";
 
 		free(mat);
 	}
