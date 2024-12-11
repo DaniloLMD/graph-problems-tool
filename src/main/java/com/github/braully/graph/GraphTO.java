@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * Transport Object of Graph representation.
  *
- * @author braully, danilo
+ * @author braully
  */
 public class GraphTO<V extends Number, E extends Number> extends UndirectedSparseGraph {
     public Boolean isDirected = false;
@@ -519,6 +519,32 @@ public class GraphTO<V extends Number, E extends Number> extends UndirectedSpars
                 adj.get(source).set(target, i);
                 if(!this.isDirected){
                     adj.get(target).set(source, i);
+                }
+            }       
+        }
+
+        return adj;
+    }
+
+    public ArrayList<ArrayList<Integer>> getAdjEdgesList(){
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+
+        String edgeString = this.getEdgeString();
+        String[] edges = edgeString != null ? edgeString.trim().split(",") : null;
+
+        for(int i = 0; i < getVertexCount(); i++){
+            adj.add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < edges.length; i++) {
+            String[] vs = edges[i].split("-");
+            if (vs.length >= 2) {
+                Integer source =  Integer.parseInt(vs[0].trim());
+                Integer target =  Integer.parseInt(vs[1].trim());
+
+                adj.get(source).add(i);
+                if(!this.isDirected){
+                    adj.get(target).add(i);
                 }
             }       
         }
