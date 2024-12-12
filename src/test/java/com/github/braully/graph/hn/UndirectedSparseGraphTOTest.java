@@ -5,7 +5,7 @@
  */
 package com.github.braully.graph.hn;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.BeanDeserializer;
 import java.io.IOException;
@@ -45,7 +45,7 @@ public class UndirectedSparseGraphTOTest extends TestCase {
                 + "\"edgeCount\":85,\"vertexCount\":25,\"defaultEdgeType\":\"UNDIRECTED\"}";
 
         ObjectMapper mapper = new ObjectMapper();
-        UndirectedSparseGraphTO readValue = mapper.readValue(jsonRequest, UndirectedSparseGraphTO.class);
+        GraphTO readValue = mapper.readValue(jsonRequest, GraphTO.class);
         assertNotNull(readValue);
     }
 }

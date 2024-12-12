@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,7 +33,7 @@ public class GraphHammingGenarator extends GraphGeneratorCartesianProduct {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         Integer d = getIntegerParameter(parameters, D);
         Integer q = getIntegerParameter(parameters, Q);
 
@@ -45,14 +45,14 @@ public class GraphHammingGenarator extends GraphGeneratorCartesianProduct {
             q = DEFAULT_Q;
         }
 
-        UndirectedSparseGraphTO<Integer, Integer> graph = generate(d, q);
+        GraphTO<Integer, Integer> graph = generate(d, q);
 
         return graph;
     }
 
-    public UndirectedSparseGraphTO<Integer, Integer> generate(Integer d, Integer q) {
-        UndirectedSparseGraphTO<Integer, Integer> kq = kgenerator.generate(q);
-        UndirectedSparseGraphTO graph = kq.clone();
+    public GraphTO<Integer, Integer> generate(Integer d, Integer q) {
+        GraphTO<Integer, Integer> kq = kgenerator.generate(q);
+        GraphTO graph = kq.clone();
 
         for (int i = 1; i < d; i++) {
             graph = this.cartesianProduct(graph, kq);
@@ -63,7 +63,7 @@ public class GraphHammingGenarator extends GraphGeneratorCartesianProduct {
 
     public static void main(String... args) {
         GraphHammingGenarator hm = new GraphHammingGenarator();
-        UndirectedSparseGraphTO<Integer, Integer> generate = hm.generate(2, 3);
+        GraphTO<Integer, Integer> generate = hm.generate(2, 3);
 //
         System.out.println(generate);
     }

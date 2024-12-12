@@ -37,7 +37,7 @@ public class ParseTest {
     @Test
     public void testG6Code() throws IOException {
         String g6 = "DCO";
-        UndirectedSparseGraphTO<Integer, Integer> graphG6 = UtilGraph.loadGraphG6(g6);
+        GraphTO<Integer, Integer> graphG6 = UtilGraph.loadGraphG6(g6);
         System.out.println(g6);
         System.out.println(graphG6);
 
@@ -46,7 +46,7 @@ public class ParseTest {
     @Test
     public void testG6File() throws IOException {
         String g6File = "/home/strike/Downloads/graph_41571.g6";
-        UndirectedSparseGraphTO<Integer, Integer> graphG6 = UtilGraph.loadGraphG6(new FileInputStream(g6File));
+        GraphTO<Integer, Integer> graphG6 = UtilGraph.loadGraphG6(new FileInputStream(g6File));
         System.out.println(graphG6);
 //        System.out.println(graphG6);
 

@@ -1,7 +1,7 @@
 package com.github.braully.graph.operation;
 
 import com.github.braully.graph.GraphWS;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -20,7 +20,7 @@ public class GraphTmpDetect implements IGraphOperation {
     GraphStatistics stats = new GraphStatistics();
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         /* Processar a buscar pelo hullset e hullnumber */
         Map<String, Object> response = new HashMap<>();
         Integer size = null;

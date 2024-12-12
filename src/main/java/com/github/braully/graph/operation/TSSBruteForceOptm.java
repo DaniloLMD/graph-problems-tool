@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class TSSBruteForceOptm
 
     GraphHullNumberHeuristicV1 heuristic = new GraphHullNumberHeuristicV1();
 
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Integer hullNumber = -1;
         Set<Integer> minHullSet = null;
 
@@ -41,7 +41,7 @@ public class TSSBruteForceOptm
     }
 
     @Override
-    public Set<Integer> findMinHullSetGraph(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Set<Integer> findMinHullSetGraph(GraphTO<Integer, Integer> graph) {
         Set<Integer> ceilling = calcCeillingHullNumberGraph(graph);
         Set<Integer> hullSet = ceilling;
         if (graph == null || graph.getVertices().isEmpty()) {
@@ -92,7 +92,7 @@ public class TSSBruteForceOptm
         return hullSet;
     }
 
-    private Set<Integer> calcCeillingHullNumberGraph(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    private Set<Integer> calcCeillingHullNumberGraph(GraphTO<Integer, Integer> graph) {
         Set<Integer> ceilling = new HashSet<>();
         if (graph != null) {
             Set<Integer> optimizedHullSet = super.buildOptimizedHullSet(graph);
@@ -103,7 +103,7 @@ public class TSSBruteForceOptm
         return ceilling;
     }
 
-    public Set<Integer> findHullSetBruteForce(UndirectedSparseGraphTO<Integer, Integer> graph, int currentSetSize) {
+    public Set<Integer> findHullSetBruteForce(GraphTO<Integer, Integer> graph, int currentSetSize) {
         Set<Integer> hullSet = null;
         if (graph == null || graph.getVertexCount() <= 0) {
             return hullSet;

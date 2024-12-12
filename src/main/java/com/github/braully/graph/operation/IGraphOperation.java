@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.Map;
 
 /**
@@ -17,5 +17,5 @@ public interface IGraphOperation {
 
     public String getName();
 
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph);
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph);
 }

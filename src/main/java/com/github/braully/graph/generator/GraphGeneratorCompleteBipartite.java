@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import static com.github.braully.graph.generator.GraphGeneratorKP.K_VERTICES;
 import java.util.Map;
 
@@ -23,7 +23,7 @@ public class GraphGeneratorCompleteBipartite extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         Integer nvertices = getIntegerParameter(parameters, K_VERTICES);
         Integer pvertices = getIntegerParameter(parameters, P_VERTICES);
 
@@ -35,7 +35,7 @@ public class GraphGeneratorCompleteBipartite extends AbstractGraphGenerator {
             pvertices = DEFAULT_NVERTICES;
         }
 
-        UndirectedSparseGraphTO<Integer, Integer> graph = new UndirectedSparseGraphTO<>();
+        GraphTO<Integer, Integer> graph = new GraphTO<>();
         graph.setName("K" + nvertices + "," + pvertices);
 
         Integer[] vertexs = new Integer[nvertices + pvertices];

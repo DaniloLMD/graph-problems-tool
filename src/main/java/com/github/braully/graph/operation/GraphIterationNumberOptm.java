@@ -5,7 +5,7 @@
  */
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import static com.github.braully.graph.operation.GraphCaratheodoryCheckSet.PROCESSED;
 import java.util.ArrayDeque;
 import java.util.Collection;
@@ -43,7 +43,7 @@ public class GraphIterationNumberOptm extends GraphHullNumberOptm {
     }
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Map<String, Object> response = new HashMap<>();
 
         Set<Integer> firstMinHullSetGraph = this.findMinHullSetGraph(graph);
@@ -84,7 +84,7 @@ public class GraphIterationNumberOptm extends GraphHullNumberOptm {
 
     }
 
-    public Map<Integer, Integer> intervalOperation(UndirectedSparseGraphTO<Integer, Integer> graph,
+    public Map<Integer, Integer> intervalOperation(GraphTO<Integer, Integer> graph,
             int[] currentSet) {
         Map<Integer, Integer> vIncludeIteracao = new HashMap<>();
         if (currentSet == null || currentSet.length == 0) {

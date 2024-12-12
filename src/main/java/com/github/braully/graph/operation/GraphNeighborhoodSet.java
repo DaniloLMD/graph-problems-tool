@@ -1,7 +1,7 @@
 package com.github.braully.graph.operation;
 
 import com.github.braully.graph.GraphWS;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,7 +19,7 @@ public class GraphNeighborhoodSet implements IGraphOperation {
     private static final Logger log = Logger.getLogger(GraphWS.class);
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Collection<Integer> set = graph.getSet();
         TreeSet<Integer> setx = new TreeSet<>();
         TreeSet<Integer> setN = new TreeSet<>();

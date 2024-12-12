@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.Random;
 
 import edu.uci.ics.jung.graph.util.Pair;
@@ -25,7 +25,7 @@ public class GraphGeneratorCartesianProduct extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
 
         String strEdges0 = getStringParameter(parameters, STRING_EDGES0);
         if (strEdges0 == null) {
@@ -37,11 +37,11 @@ public class GraphGeneratorCartesianProduct extends AbstractGraphGenerator {
         }
         double r_impact = getDoubleParameter(parameters, RANDOM_IMPACT);
 
-        UndirectedSparseGraphTO<Integer, Integer> graph0 = new UndirectedSparseGraphTO<>();
+        GraphTO<Integer, Integer> graph0 = new GraphTO<>();
         graph0.setName("G");
         graph0.addEdgesFromString(strEdges0);
 
-        UndirectedSparseGraphTO<Integer, Integer> graph1 = new UndirectedSparseGraphTO<>();
+        GraphTO<Integer, Integer> graph1 = new GraphTO<>();
         graph1.setName("H");
         graph1.addEdgesFromString(strEdges1);
 
@@ -64,14 +64,14 @@ public class GraphGeneratorCartesianProduct extends AbstractGraphGenerator {
         }
 
         // Positions (x,y) to a vertex v are (positionX[v], positionY[v])
-        UndirectedSparseGraphTO<Integer, Integer> graph = cartesianProduct(graph0, graph1);
+        GraphTO<Integer, Integer> graph = cartesianProduct(graph0, graph1);
         graph.setPositionX(positionX);
         graph.setPositionY(positionY);
         return graph;
     }
 
     // Calculates the cartesian product G x H of two graphs G and H
-    UndirectedSparseGraphTO<Integer, Integer> cartesianProduct(UndirectedSparseGraphTO<Integer, Integer> graph0, UndirectedSparseGraphTO<Integer, Integer> graph1) {
+    GraphTO<Integer, Integer> cartesianProduct(GraphTO<Integer, Integer> graph0, GraphTO<Integer, Integer> graph1) {
         int nvertices0 = graph0.getVertexCount();
         int nvertices1 = graph1.getVertexCount();
 
@@ -80,7 +80,7 @@ public class GraphGeneratorCartesianProduct extends AbstractGraphGenerator {
         // To know aij from (vi, uj), aij = vi*nvertices1 + uj
         int nvertices = nvertices0 * nvertices1;
 
-        UndirectedSparseGraphTO<Integer, Integer> graph = new UndirectedSparseGraphTO<>();
+        GraphTO<Integer, Integer> graph = new GraphTO<>();
         graph.setName("G x H");
 
         List<Integer> vertexElegibles = new ArrayList<>(nvertices);

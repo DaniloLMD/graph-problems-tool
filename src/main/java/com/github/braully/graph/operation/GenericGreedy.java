@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +33,7 @@ public class GenericGreedy
     public GenericGreedy() {
     }
 
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Integer hullNumber = 0;
         Set<Integer> minHullSet = null;
 
@@ -78,7 +78,7 @@ public class GenericGreedy
     protected int[] skip = null;
     protected int countContaminatedVertices = 0;
 
-    public Set<Integer> buildTargeSet(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Set<Integer> buildTargeSet(GraphTO<Integer, Integer> graph) {
         if (graph == null) {
             return null;
         }
@@ -183,7 +183,7 @@ public class GenericGreedy
     }
 
     public int addVertToAux(Integer verti,
-            UndirectedSparseGraphTO<Integer, Integer> graph,
+            GraphTO<Integer, Integer> graph,
             int[] aux) {
         int countIncluded = 0;
         if (verti == null) {
@@ -211,7 +211,7 @@ public class GenericGreedy
     }
 
     public int addVertToS(Integer verti, Set<Integer> s,
-            UndirectedSparseGraphTO<Integer, Integer> graph,
+            GraphTO<Integer, Integer> graph,
             int[] aux) {
         int countIncluded = 0;
         if (verti == null) {
@@ -243,7 +243,7 @@ public class GenericGreedy
 
     protected int[] scount = null;
 
-    public Set<Integer> refineResultStep1(UndirectedSparseGraphTO<Integer, Integer> graphRead,
+    public Set<Integer> refineResultStep1(GraphTO<Integer, Integer> graphRead,
             Set<Integer> tmp, int tamanhoAlvo) {
         Set<Integer> s = new LinkedHashSet<>(tmp);
 
@@ -262,7 +262,7 @@ public class GenericGreedy
         return s;
     }
 
-    public Set<Integer> refineResultStep2(UndirectedSparseGraphTO<Integer, Integer> graphRead,
+    public Set<Integer> refineResultStep2(GraphTO<Integer, Integer> graphRead,
             Set<Integer> tmp, int tamanhoAlvo) {
         Set<Integer> s = tmp;
 
@@ -330,7 +330,7 @@ public class GenericGreedy
 
     public static void main(String... args) throws IOException {
         System.out.println("Execution Sample: Livemocha database R=2");
-        UndirectedSparseGraphTO<Integer, Integer> graph = null;
+        GraphTO<Integer, Integer> graph = null;
         GenericGreedy op = new GenericGreedy();
 
 //        URI urinode = URI.create("jar:file:data/big/all-big.zip!/Livemocha/nodes.csv");

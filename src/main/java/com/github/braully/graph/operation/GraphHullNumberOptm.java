@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import static com.github.braully.graph.operation.GraphCaratheodoryCheckSet.PROCESSED;
 import java.util.ArrayDeque;
 import java.util.Collection;
@@ -17,7 +17,7 @@ public class GraphHullNumberOptm extends GraphHullNumberHeuristicV1 implements I
     GraphHullNumberHeuristicV1 heuristic = new GraphHullNumberHeuristicV1();
 
     @Override
-    public Set<Integer> findMinHullSetGraph(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Set<Integer> findMinHullSetGraph(GraphTO<Integer, Integer> graph) {
         Set<Integer> ceilling = calcCeillingHullNumberGraph(graph);
         Set<Integer> hullSet = ceilling;
         if (graph == null || graph.getVertices().isEmpty()) {
@@ -67,7 +67,7 @@ public class GraphHullNumberOptm extends GraphHullNumberHeuristicV1 implements I
     }
 
     public int addVertToS(Integer verti, Set<Integer> s,
-            UndirectedSparseGraphTO<Integer, Integer> graph,
+            GraphTO<Integer, Integer> graph,
             int[] aux) {
         int countIncluded = 0;
         if (verti == null || aux[verti] >= INCLUDED) {
@@ -97,7 +97,7 @@ public class GraphHullNumberOptm extends GraphHullNumberHeuristicV1 implements I
         return countIncluded;
     }
 
-    private Set<Integer> calcCeillingHullNumberGraph(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    private Set<Integer> calcCeillingHullNumberGraph(GraphTO<Integer, Integer> graph) {
         Set<Integer> ceilling = new HashSet<>();
         if (graph != null) {
             Set<Integer> optimizedHullSet = super.buildOptimizedHullSet(graph);
@@ -108,7 +108,7 @@ public class GraphHullNumberOptm extends GraphHullNumberHeuristicV1 implements I
         return ceilling;
     }
 
-    public Set<Integer> findHullSetBruteForce(UndirectedSparseGraphTO<Integer, Integer> graph, int currentSetSize) {
+    public Set<Integer> findHullSetBruteForce(GraphTO<Integer, Integer> graph, int currentSetSize) {
         Set<Integer> hullSet = null;
         if (graph == null || graph.getVertexCount() <= 0) {
             return hullSet;
@@ -128,7 +128,7 @@ public class GraphHullNumberOptm extends GraphHullNumberHeuristicV1 implements I
         return hullSet;
     }
 
-    public boolean checkIfHullSet(UndirectedSparseGraphTO<Integer, Integer> graph,
+    public boolean checkIfHullSet(GraphTO<Integer, Integer> graph,
             int[] currentSet) {
         if (currentSet == null || currentSet.length == 0) {
             return false;
@@ -165,7 +165,7 @@ public class GraphHullNumberOptm extends GraphHullNumberHeuristicV1 implements I
         return fecho.size() == graph.getVertexCount();
     }
 
-    public void includeVertex(UndirectedSparseGraphTO<Integer, Integer> graph, Set<Integer> fecho, int[] aux, int i) {
+    public void includeVertex(GraphTO<Integer, Integer> graph, Set<Integer> fecho, int[] aux, int i) {
         fecho.add(i);
         aux[i] = INCLUDED;
         Collection<Integer> neighbors = graph.getNeighbors(i);

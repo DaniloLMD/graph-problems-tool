@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.Map;
 
 public class GraphGeneratorFromEdge extends AbstractGraphGenerator {
@@ -22,7 +22,7 @@ public class GraphGeneratorFromEdge extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         Integer nvertices = getIntegerParameter(parameters, N_VERTICES);
 
         if (nvertices == null) {
@@ -31,7 +31,7 @@ public class GraphGeneratorFromEdge extends AbstractGraphGenerator {
 
         String strEdges = getStringParameter(parameters, STRING_EDGES);
 
-        UndirectedSparseGraphTO<Integer, Integer> graph = new UndirectedSparseGraphTO<>();
+        GraphTO<Integer, Integer> graph = new GraphTO<>();
         graph.setName("ES" + N_VERTICES);
 
         graph.addEdgesFromString(strEdges);

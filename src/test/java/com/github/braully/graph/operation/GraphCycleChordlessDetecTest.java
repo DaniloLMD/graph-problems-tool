@@ -23,7 +23,7 @@
  */
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -46,7 +46,7 @@ public class GraphCycleChordlessDetecTest {
 
     String strGraph = "4-2,3-0,3-2,2-0,1-3,1-0,";
 
-    UndirectedSparseGraphTO graphForTest1 = new UndirectedSparseGraphTO(strGraph);
+    GraphTO graphForTest1 = new GraphTO(strGraph);
 
     public GraphCycleChordlessDetecTest() {
     }
@@ -54,7 +54,7 @@ public class GraphCycleChordlessDetecTest {
     @Test
     public void testFindCycleBruteForce() {
         System.out.println("findCycleBruteForce");
-        UndirectedSparseGraphTO<Integer, Integer> graph = this.graphForTest1.clone();
+        GraphTO<Integer, Integer> graph = this.graphForTest1.clone();
         int currentSize = 4;
         GraphCycleChordlessDetec instance = new GraphCycleChordlessDetec();
         List<Integer> result = instance.findCycleBruteForce(graph, currentSize);
@@ -67,7 +67,7 @@ public class GraphCycleChordlessDetecTest {
     @Test
     public void testFindAllCyclesBruteForce() throws FileNotFoundException, IOException {
         System.out.println("findCycleBruteForce");
-        UndirectedSparseGraphTO<Integer, Integer> graph = UtilGraph.loadGraphES(new FileInputStream("./grafo-moore-50.es"));
+        GraphTO<Integer, Integer> graph = UtilGraph.loadGraphES(new FileInputStream("./grafo-moore-50.es"));
         int contCycle = 0;
         int currentSize = 5;
         Integer vind = 47;

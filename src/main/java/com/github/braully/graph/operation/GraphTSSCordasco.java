@@ -1,7 +1,7 @@
 package com.github.braully.graph.operation;
 
 import com.github.braully.graph.GraphWS;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -57,7 +57,7 @@ public class GraphTSSCordasco extends AbstractHeuristic implements IGraphOperati
     public Integer marjority;
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
 //        Set<Integer> setN = new HashSet<>();
 //        setN.addAll(graph.getSet());
         try {
@@ -90,11 +90,11 @@ public class GraphTSSCordasco extends AbstractHeuristic implements IGraphOperati
         return response;
     }
 
-    public Set<Integer> tssCordasco(UndirectedSparseGraphTO graph) {
+    public Set<Integer> tssCordasco(GraphTO graph) {
         return tssCordasco(graph, null);
     }
 
-    public Set<Integer> tssCordasco(UndirectedSparseGraphTO graph, List<Integer> reqList) {
+    public Set<Integer> tssCordasco(GraphTO graph, List<Integer> reqList) {
         Set<Integer> S = new LinkedHashSet<>();
         initKr(graph);
         //(G -> Vertices.begin(), G -> Vertices.end())
@@ -229,7 +229,7 @@ public class GraphTSSCordasco extends AbstractHeuristic implements IGraphOperati
 
         System.out.println("Teste greater: ");
 
-        UndirectedSparseGraphTO<Integer, Integer> graph = null;
+        GraphTO<Integer, Integer> graph = null;
 //        graph = new UndirectedSparseGraphTO("681-753,681-1381,681-4658,753-1381,753-4658,1381-2630,1381-2819,1381-4220,1381-4658,2630-2819,2630-3088,2630-4220,2819-3088,2819-4220,");
 
 //        graph = UtilGraph.loadGraphG6("S?????????????????w@oK?B??GW@OE?g");

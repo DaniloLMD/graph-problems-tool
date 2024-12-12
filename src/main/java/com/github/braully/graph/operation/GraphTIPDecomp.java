@@ -1,7 +1,7 @@
 package com.github.braully.graph.operation;
 
 import com.github.braully.graph.GraphWS;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,7 +30,7 @@ public class GraphTIPDecomp extends AbstractHeuristic implements IGraphOperation
     public Integer marjority;
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
 //        Set<Integer> setN = new HashSet<>();
 //        setN.addAll(graph.getSet());
         String inputData = graph.getInputData();
@@ -52,11 +52,11 @@ public class GraphTIPDecomp extends AbstractHeuristic implements IGraphOperation
         return response;
     }
 
-    public Set<Integer> tipDecomp(UndirectedSparseGraphTO graph) {
+    public Set<Integer> tipDecomp(GraphTO graph) {
         return tipDecomp(graph, null);
     }
 
-    public Set<Integer> tipDecomp(UndirectedSparseGraphTO graph, List<Integer> reqList) {
+    public Set<Integer> tipDecomp(GraphTO graph, List<Integer> reqList) {
         Set<Integer> S = new LinkedHashSet<>(graph.getVertices());
         initKr(graph);
         int n = graph.getVertexCount();
@@ -116,7 +116,7 @@ public class GraphTIPDecomp extends AbstractHeuristic implements IGraphOperation
 
         System.out.println("Teste greater: ");
 
-        UndirectedSparseGraphTO<Integer, Integer> graph = null;
+        GraphTO<Integer, Integer> graph = null;
 //        graph = UtilGraph.loadBigDataset(new FileInputStream("/home/strike/Workspace/tss/TSSGenetico/Instancias/ca-GrQc/ca-GrQc.txt"));
         graph = UtilGraph.loadBigDataset(
                 new FileInputStream("/home/strike/Workspace/tss/TSSGenetico/Instancias/BlogCatalog3/nodes.csv"),

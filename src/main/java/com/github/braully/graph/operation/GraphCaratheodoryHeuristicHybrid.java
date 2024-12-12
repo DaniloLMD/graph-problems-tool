@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import static com.github.braully.graph.operation.GraphCaratheodoryAllSetOfSize.log;
 import java.util.ArrayDeque;
 import java.util.Collection;
@@ -20,7 +20,7 @@ public class GraphCaratheodoryHeuristicHybrid extends GraphCaratheodoryCheckSet
     static final String description = "Caratheodory No. Heuristic Mix";
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graphRead) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graphRead) {
         Map<String, Object> result = super.doOperation(graphRead);
         if (expand) {
             GraphCaratheodoryExpandSet expand = new GraphCaratheodoryExpandSet();
@@ -39,11 +39,11 @@ public class GraphCaratheodoryHeuristicHybrid extends GraphCaratheodoryCheckSet
         return result;
     }
 
-    void beforeReturnSFind(UndirectedSparseGraphTO<Integer, Integer> graph, Set<Integer> s, int[] aux) {
+    void beforeReturnSFind(GraphTO<Integer, Integer> graph, Set<Integer> s, int[] aux) {
         expandCaratheodorySet(graph, s, aux);
     }
 
-    public Set<Integer> buildMaxCaratheodorySet(UndirectedSparseGraphTO<Integer, Integer> graphRead) {
+    public Set<Integer> buildMaxCaratheodorySet(GraphTO<Integer, Integer> graphRead) {
         Set<Integer> caratheodorySet = new HashSet<>();
         Collection<Integer> vertices = graphRead.getVertices();
         for (Integer v : vertices) {
@@ -61,7 +61,7 @@ public class GraphCaratheodoryHeuristicHybrid extends GraphCaratheodoryCheckSet
         return caratheodorySet;
     }
 
-    private Set<Integer> buildCaratheodorySetFromStartVertice(UndirectedSparseGraphTO<Integer, Integer> graph,
+    private Set<Integer> buildCaratheodorySetFromStartVertice(GraphTO<Integer, Integer> graph,
             Integer v) {
         Set<Integer> s = new HashSet<>();
         int vertexCount = graph.getVertexCount();
@@ -74,7 +74,7 @@ public class GraphCaratheodoryHeuristicHybrid extends GraphCaratheodoryCheckSet
         return s;
     }
 
-    public void expandCaratheodorySet(UndirectedSparseGraphTO<Integer, Integer> graph,
+    public void expandCaratheodorySet(GraphTO<Integer, Integer> graph,
             Set<Integer> s, int[] aux) {
         int vertexCount = graph.getVertexCount();
         int bv;
@@ -126,7 +126,7 @@ public class GraphCaratheodoryHeuristicHybrid extends GraphCaratheodoryCheckSet
     }
 
     public void addVertToS(Integer verti, Set<Integer> s,
-            UndirectedSparseGraphTO<Integer, Integer> graph,
+            GraphTO<Integer, Integer> graph,
             int[] aux) {
 
         if (verti == null || aux[verti] >= INCLUDED) {
@@ -154,7 +154,7 @@ public class GraphCaratheodoryHeuristicHybrid extends GraphCaratheodoryCheckSet
         }
     }
 
-    public Integer selectBestNeighbor(Integer v, UndirectedSparseGraphTO<Integer, Integer> graph,
+    public Integer selectBestNeighbor(Integer v, GraphTO<Integer, Integer> graph,
             int[] aux, Integer partial, int[] auxBackup) {
         Integer ret = null;
         Set<Integer> neighbors = new HashSet<>(graph.getNeighbors(v));
@@ -180,7 +180,7 @@ public class GraphCaratheodoryHeuristicHybrid extends GraphCaratheodoryCheckSet
     }
 
     public void removeVertFromS(Integer verti, Set<Integer> s,
-            UndirectedSparseGraphTO<Integer, Integer> graph,
+            GraphTO<Integer, Integer> graph,
             int[] aux) {
 
         for (int i = 0; i < aux.length; i++) {

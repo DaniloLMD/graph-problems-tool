@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,21 +23,21 @@ public class GraphGeneratorPath extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         Integer nvertices = getIntegerParameter(parameters, N_VERTICES);
 
         if (nvertices == null) {
             nvertices = DEFAULT_NVERTICES;
         }
 
-        UndirectedSparseGraphTO<Integer, Integer> graph = generatePathGraph(nvertices);
+        GraphTO<Integer, Integer> graph = generatePathGraph(nvertices);
         graph.setName("P" + N_VERTICES);
 
         return graph;
     }
 
-    public UndirectedSparseGraphTO<Integer, Integer> generatePathGraph(Integer nvertices) {
-        UndirectedSparseGraphTO<Integer, Integer> graph = new UndirectedSparseGraphTO<>();
+    public GraphTO<Integer, Integer> generatePathGraph(Integer nvertices) {
+        GraphTO<Integer, Integer> graph = new GraphTO<>();
         List<Integer> vertexElegibles = new ArrayList<>(nvertices);
         Integer[] vertexs = new Integer[nvertices];
         for (int i = 0; i < nvertices; i++) {

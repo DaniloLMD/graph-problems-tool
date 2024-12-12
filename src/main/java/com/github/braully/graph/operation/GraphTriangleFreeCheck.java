@@ -1,7 +1,7 @@
 package com.github.braully.graph.operation;
 
 import com.github.braully.graph.GraphWS;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.Logger;
@@ -14,7 +14,7 @@ public class GraphTriangleFreeCheck implements IGraphOperation {
     private static final Logger log = Logger.getLogger(GraphWS.class);
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         /* Processar a buscar pelo hullset e hullnumber */
         Map<String, Object> response = new HashMap<>();
         try {
@@ -42,7 +42,7 @@ public class GraphTriangleFreeCheck implements IGraphOperation {
      * Reference:
      * https://github.com/piyushroshan/GraphTheoryProject/blob/master/src/gtc/MaxTriangleFreeGraph.java
      */
-    public boolean isTriangleFree(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public boolean isTriangleFree(GraphTO<Integer, Integer> graph) {
         if (graph == null || graph.getVertexCount() == 0) {
             return false;
         }
@@ -79,19 +79,19 @@ public class GraphTriangleFreeCheck implements IGraphOperation {
         }
     }
 
-    public boolean isMaximalTriangleFree(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public boolean isMaximalTriangleFree(GraphTO<Integer, Integer> graph) {
         if (graph == null || graph.getVertexCount() == 0) {
             return false;
         }
         return isTriangleFree(graph) && isPossibleAddArest(graph);
     }
 
-    protected boolean isPossibleAddArest(UndirectedSparseGraphTO<Integer, Integer> g) {
+    protected boolean isPossibleAddArest(GraphTO<Integer, Integer> g) {
         if (g == null || g.getVertexCount() == 0) {
             return false;
         }
         boolean ret = true;
-        UndirectedSparseGraphTO graph = g.clone();
+        GraphTO graph = g.clone();
         int n = graph.getVertexCount();
         for (int i = 0; i < n && ret; i++) {
             for (int j = 0; j < i && ret; j++) {

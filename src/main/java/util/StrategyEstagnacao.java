@@ -1,6 +1,6 @@
 package util;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import edu.uci.ics.jung.graph.util.Pair;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -281,7 +281,7 @@ public class StrategyEstagnacao implements IGenStrategy {
         }
     }
 
-    void verboseFimEtapa(TreeMap<Integer, Collection<Integer>> caminhoPercorrido, UndirectedSparseGraphTO insumo) {
+    void verboseFimEtapa(TreeMap<Integer, Collection<Integer>> caminhoPercorrido, GraphTO insumo) {
         System.out.println("------------------------------------------------------------------------------------------------");
         System.out.print("Caminhos percorrido: ");
         caminhoPercorrido.entrySet().forEach(e -> System.out.printf("%d(%s)=%s\n", e.getKey(), insumo.getEndpoints(e.getKey()), e.getValue().toString()));

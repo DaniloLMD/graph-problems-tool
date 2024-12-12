@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +29,7 @@ public class GraphGeneratorRandom extends AbstractGraphGenerator {
     }
     
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         Integer nvertices = getIntegerParameter(parameters, N_VERTICES);
         Integer minDegree = getIntegerParameter(parameters, MIN_DEGREE);
         Double maxDegree = getDoubleParameter(parameters, MAX_DEGREE);
@@ -44,7 +44,7 @@ public class GraphGeneratorRandom extends AbstractGraphGenerator {
             maxDegree = DEFAULT_MAX_DEGREE;
         }
         
-        UndirectedSparseGraphTO<Integer, Integer> graph = new UndirectedSparseGraphTO<>();
+        GraphTO<Integer, Integer> graph = new GraphTO<>();
         graph.setName("Random-n" + nvertices + "-min" + minDegree + "-max" + maxDegree);
         
         List<Integer> vertexElegibles = new ArrayList<>(nvertices);

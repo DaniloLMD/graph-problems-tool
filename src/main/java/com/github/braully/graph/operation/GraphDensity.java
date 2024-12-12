@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +26,7 @@ public class GraphDensity implements IGraphOperation {
     }
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         double d = density(graph);
 
         /* Processar a buscar pelo hullset e hullnumber */
@@ -36,7 +36,7 @@ public class GraphDensity implements IGraphOperation {
         return response;
     }
 
-    public double density(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public double density(GraphTO<Integer, Integer> graph) {
         double d = 0.0;
         try {
             double m = graph.getEdgeCount();

@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class GraphHullNumberHeuristicV1
     public GraphHullNumberHeuristicV1() {
     }
 
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Integer hullNumber = -1;
         Set<Integer> minHullSet = null;
 
@@ -59,13 +59,13 @@ public class GraphHullNumberHeuristicV1
         return response;
     }
 
-    public Set<Integer> findMinHullSetGraph(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Set<Integer> findMinHullSetGraph(GraphTO<Integer, Integer> graph) {
         return buildOptimizedHullSet(graph);
 
     }
 
 //    @Override
-    public Set<Integer> buildOptimizedHullSet(UndirectedSparseGraphTO<Integer, Integer> graphRead) {
+    public Set<Integer> buildOptimizedHullSet(GraphTO<Integer, Integer> graphRead) {
         List<Integer> vertices = new ArrayList<>((List<Integer>) graphRead.getVertices());
         Set<Integer> hullSet = null;
         Integer vl = null;
@@ -135,7 +135,7 @@ public class GraphHullNumberHeuristicV1
         return hullSet;
     }
 
-    protected Set<Integer> buildOptimizedHullSetFromStartVertice(UndirectedSparseGraphTO<Integer, Integer> graph,
+    protected Set<Integer> buildOptimizedHullSetFromStartVertice(GraphTO<Integer, Integer> graph,
             Integer v, Set<Integer> sini, int[] auxini, int sizeHsini) {
         Set<Integer> s = new HashSet<>(sini);
         int vertexCount = graph.getVertexCount();
@@ -204,7 +204,7 @@ public class GraphHullNumberHeuristicV1
     }
 
     public int addVertToS(Integer verti, Set<Integer> s,
-            UndirectedSparseGraphTO<Integer, Integer> graph,
+            GraphTO<Integer, Integer> graph,
             int[] aux) {
         int countIncluded = 0;
         if (verti == null || aux[verti] >= K) {
@@ -235,7 +235,7 @@ public class GraphHullNumberHeuristicV1
     }
 
     public Set<Integer> findHullSubSetBruteForce(
-            UndirectedSparseGraphTO<Integer, Integer> graph,
+            GraphTO<Integer, Integer> graph,
             int currentSetSize, Integer... subset) {
         Set<Integer> hullSet = null;
         if (graph == null || graph.getVertexCount() <= 0) {
@@ -269,7 +269,7 @@ public class GraphHullNumberHeuristicV1
         return hullSet;
     }
 
-    public Set<Integer> tryMinimal(UndirectedSparseGraphTO<Integer, Integer> graphRead, Set<Integer> tmp) {
+    public Set<Integer> tryMinimal(GraphTO<Integer, Integer> graphRead, Set<Integer> tmp) {
         Set<Integer> s = tmp;
         if (verbose) {
             System.out.println("tentando reduzir: " + s.size());
@@ -291,7 +291,7 @@ public class GraphHullNumberHeuristicV1
         return s;
     }
 
-    public boolean checkIfHullSet(UndirectedSparseGraphTO<Integer, Integer> graph,
+    public boolean checkIfHullSet(GraphTO<Integer, Integer> graph,
             Integer... currentSet) {
         if (currentSet == null || currentSet.length == 0) {
             return false;
@@ -328,13 +328,13 @@ public class GraphHullNumberHeuristicV1
         return fecho.size() == graph.getVertexCount();
     }
 
-    public Set<Integer> buildOptimizedHullSetTryMinimal(UndirectedSparseGraphTO<Integer, Integer> graphRead) {
+    public Set<Integer> buildOptimizedHullSetTryMinimal(GraphTO<Integer, Integer> graphRead) {
         Set<Integer> optimizedHullSet = this.buildOptimizedHullSet(graphRead);
         Set<Integer> optimizedMinimalHullSet = tryMinimal(graphRead, optimizedHullSet);
         return optimizedMinimalHullSet;
     }
 
-    public boolean checkIfHullSubSet(UndirectedSparseGraphTO<Integer, Integer> graph, List<Integer> vertices, int[] currentSet, Integer[] subset) {
+    public boolean checkIfHullSubSet(GraphTO<Integer, Integer> graph, List<Integer> vertices, int[] currentSet, Integer[] subset) {
         if (currentSet == null || currentSet.length == 0) {
             return false;
         }
@@ -378,7 +378,7 @@ public class GraphHullNumberHeuristicV1
     public static void main(String... args) throws IOException {
         GraphHullNumberHeuristicV1 op = new GraphHullNumberHeuristicV1();
         GraphHullNumberOptm op2 = new GraphHullNumberOptm();
-        UndirectedSparseGraphTO<Integer, Integer> graph = null;
+        GraphTO<Integer, Integer> graph = null;
 //        graph = new UndirectedSparseGraphTO("0-1,0-3,1-2,3-4,3-5,4-5,");
 //        graph = UtilGraph.loadGraphG6("S??OOc_OAP?G@_?KQ?C????[?EPWgF??W");
 //        graph = UtilGraph.loadGraphG6("Ss_?G?@???coH`CEABGR?AWDe?A_oAR??");

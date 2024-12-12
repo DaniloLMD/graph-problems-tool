@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.generator.GraphGeneratorRandomGilbert;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class GreedyDistAndDifDelta
         this.verbose = true;
     }
 
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Integer hullNumber = 0;
         Set<Integer> minHullSet = null;
 
@@ -84,7 +84,7 @@ public class GreedyDistAndDifDelta
     //has uncontaminated vertices on the current component
     protected boolean hasVerticesOnCC = false;
 
-    public Set<Integer> buildTargeSet(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Set<Integer> buildTargeSet(GraphTO<Integer, Integer> graph) {
         if (graph == null) {
             return null;
         }
@@ -233,7 +233,7 @@ public class GreedyDistAndDifDelta
     }
 
     public int addVertToAux(Integer verti,
-            UndirectedSparseGraphTO<Integer, Integer> graph,
+            GraphTO<Integer, Integer> graph,
             int[] aux) {
         int countIncluded = 0;
         if (verti == null) {
@@ -261,7 +261,7 @@ public class GreedyDistAndDifDelta
     }
 
     public int addVertToS(Integer verti, Set<Integer> s,
-            UndirectedSparseGraphTO<Integer, Integer> graph,
+            GraphTO<Integer, Integer> graph,
             int[] aux) {
         int countIncluded = 0;
         if (verti == null) {
@@ -308,7 +308,7 @@ public class GreedyDistAndDifDelta
 
     public static void main(String... args) throws IOException {
 //        System.out.println("Execution Sample: Livemocha database R=2");
-        UndirectedSparseGraphTO<Integer, Integer> graph = null;
+        GraphTO<Integer, Integer> graph = null;
         GreedyDistAndDifDelta op = new GreedyDistAndDifDelta();
 //
 ////        URI urinode = URI.create("jar:file:data/big/all-big.zip!/Livemocha/nodes.csv");
@@ -346,7 +346,7 @@ public class GreedyDistAndDifDelta
         GraphDensity dens = new GraphDensity();
 
         op.setK(2);
-        graph = new UndirectedSparseGraphTO<>("0-1,1-2,2-3,3-4,4-5,5-0");
+        graph = new GraphTO<>("0-1,1-2,2-3,3-4,4-5,5-0");
 //        double dr = dens.density(graph);
 //        Set<Integer> findMinHullSetGraph = op.buildTargeSet(graph);
 //        System.out.printf("%d %2f", findMinHullSetGraph.size(), dr);

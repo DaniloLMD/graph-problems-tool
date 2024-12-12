@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import com.github.braully.graph.UtilGraph;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,7 +21,7 @@ public class TIPDecomp extends AbstractHeuristic implements IGraphOperation {
     static final String description = "TIPDecomp";
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
 
         /* Processar a buscar pelo hullset e hullnumber */
         Map<String, Object> response = new HashMap<>();
@@ -39,7 +39,7 @@ public class TIPDecomp extends AbstractHeuristic implements IGraphOperation {
         return response;
     }
 
-    public Set<Integer> tipDecomp(UndirectedSparseGraphTO graph) {
+    public Set<Integer> tipDecomp(GraphTO graph) {
 
         Set<Integer> S = new LinkedHashSet<>(graph.getVertices());
         initKr(graph);
@@ -95,7 +95,7 @@ public class TIPDecomp extends AbstractHeuristic implements IGraphOperation {
     public static void main(String... args) throws FileNotFoundException, IOException {
         TIPDecomp optss = new TIPDecomp();
 
-        UndirectedSparseGraphTO<Integer, Integer> graph = null;
+        GraphTO<Integer, Integer> graph = null;
 //        graph = UtilGraph.loadGraphES("0-2,1-4,2-3,2-4,");
         graph = UtilGraph.loadBigDataset(
                 new FileInputStream("/home/strike/Workspace/tss/TSSGenetico/Instancias/Foursquare/nodes.csv"),

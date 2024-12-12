@@ -1,7 +1,7 @@
 package com.github.braully.graph.operation;
 
 import com.github.braully.graph.GraphWS;
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -15,7 +15,7 @@ public class GraphSubgraphNeighborHood extends GraphSubgraph implements IGraphOp
     private static final Logger log = Logger.getLogger(GraphWS.class);
 
     @Override
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         Set<Integer> setN = new HashSet<>();
         setN.addAll(graph.getSet());
         for (Object v : graph.getSet()) {
@@ -24,7 +24,7 @@ public class GraphSubgraphNeighborHood extends GraphSubgraph implements IGraphOp
 
         /* Processar a buscar pelo hullset e hullnumber */
         Map<String, Object> response = new HashMap<>();
-        UndirectedSparseGraphTO subgraph = subGraphInduced(graph, setN);
+        GraphTO subgraph = subGraphInduced(graph, setN);
 
         try {
             response.put("ES-Subgraph", subgraph.getEdgeString());

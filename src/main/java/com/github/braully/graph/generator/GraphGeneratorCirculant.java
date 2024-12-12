@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -24,7 +24,7 @@ public class GraphGeneratorCirculant extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         Integer nvertices = getIntegerParameter(parameters, N_VERTICES);
 
         if (nvertices == null) {
@@ -36,8 +36,8 @@ public class GraphGeneratorCirculant extends AbstractGraphGenerator {
         return generate(nvertices, strEdges);
     }
 
-    public UndirectedSparseGraphTO<Integer, Integer> generate(Integer nvertices, String strEdges) throws NumberFormatException {
-        UndirectedSparseGraphTO<Integer, Integer> graph = new UndirectedSparseGraphTO<>();
+    public GraphTO<Integer, Integer> generate(Integer nvertices, String strEdges) throws NumberFormatException {
+        GraphTO<Integer, Integer> graph = new GraphTO<>();
         graph.setName("C(" + nvertices + ",{" + strEdges + "})");
 
         Integer[] vertexs = new Integer[nvertices];

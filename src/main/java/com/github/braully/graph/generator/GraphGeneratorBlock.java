@@ -1,6 +1,6 @@
 package com.github.braully.graph.generator;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.ArrayDeque;
 import java.util.Map;
 import java.util.Queue;
@@ -25,7 +25,7 @@ public class GraphGeneratorBlock extends AbstractGraphGenerator {
     }
 
     @Override
-    public UndirectedSparseGraphTO<Integer, Integer> generateGraph(Map parameters) {
+    public GraphTO<Integer, Integer> generateGraph(Map parameters) {
         Integer nblocks = getIntegerParameter(parameters, N_VERTICES);
         Integer maxclique = getIntegerParameter(parameters, MAX_CLIQUE);
 
@@ -38,7 +38,7 @@ public class GraphGeneratorBlock extends AbstractGraphGenerator {
         }
 
         Integer verticeCount = 0;
-        UndirectedSparseGraphTO<Integer, Integer> graph = new UndirectedSparseGraphTO<>();
+        GraphTO<Integer, Integer> graph = new GraphTO<>();
         graph.setName("Block-" + nblocks + "-" + maxclique);
 
         Integer[] joinPoints = new Integer[nblocks];

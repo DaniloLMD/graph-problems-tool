@@ -1,6 +1,6 @@
 package com.github.braully.graph.operation;
 
-import com.github.braully.graph.UndirectedSparseGraphTO;
+import com.github.braully.graph.GraphTO;
 import java.util.Map;
 
 /**
@@ -12,7 +12,7 @@ public class GraphCaratheodoryExistsSetOfSize extends GraphCaratheodoryNumberBin
     static final String type = "P3-Convexity";
     static final String description = "Caratheodory Exists Set of Size";
 
-    public Map<String, Object> doOperation(UndirectedSparseGraphTO<Integer, Integer> graph) {
+    public Map<String, Object> doOperation(GraphTO<Integer, Integer> graph) {
         OperationConvexityGraphResult processedCaratheodroySet = null;
         Map<String, Object> result = null;
         if (graph == null) {
