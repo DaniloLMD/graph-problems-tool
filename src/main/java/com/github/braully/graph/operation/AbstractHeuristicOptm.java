@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package com.github.braully.graph.operation;
-
-;
-
 import com.github.braully.graph.UndirectedSparseGraphTO;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
