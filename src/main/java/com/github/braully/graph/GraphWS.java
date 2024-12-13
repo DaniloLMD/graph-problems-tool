@@ -263,9 +263,6 @@ public class GraphWS {
     public Map<String, Object> operation(@RequestBody String jsonGraph) {
         Map<String, Object> result = null;
 
-        
-        System.out.println("JSON DO GRAFO = " + jsonGraph + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
         try {
             ObjectMapper mapper = new ObjectMapper();
             GraphTO graph = mapper.readValue(jsonGraph, GraphTO.class

@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * Transport Object of Graph representation.
  *
- * @author braully, danilo
+ * @author braully
  */
 public class GraphTO<V extends Number, E extends Number> extends UndirectedSparseGraph {
     public Boolean isDirected = false;
@@ -51,11 +51,13 @@ public class GraphTO<V extends Number, E extends Number> extends UndirectedSpars
     }
 
     public Integer  getEdgeWeight(E edge) {
-        return edgeWeights.get(edge + "");
+        return getEdgeWeight(edge + "");
     }
 
     public Integer  getEdgeWeight(String edge) {
-        return edgeWeights.get(edge);
+        Integer w = edgeWeights.get(edge);
+        if(w == null) w = 1; 
+        return w;
     }
 
     public void setEdgeWeight(E edge, Integer weight) {
@@ -123,8 +125,9 @@ public class GraphTO<V extends Number, E extends Number> extends UndirectedSpars
     public void addEdgesFromString(String strEdges, String strWeights) {
         String[] edges = strEdges != null ? strEdges.trim().split(",") : null;
         String[] weights = strWeights != null ? strWeights.trim().split(",") : null;
-        
-        if (edges != null && weights != null && edges.length == weights.length) {
+
+
+        if (edges != null /*&& weights != null*/ /*&& edges.length == weights.length*/) {
             int countEdge = this.getEdgeCount();
             try {
                 for (int i = 0; i < edges.length; i++) {
@@ -132,10 +135,14 @@ public class GraphTO<V extends Number, E extends Number> extends UndirectedSpars
                     if (vs.length >= 2) {
                         V source = (V) (Number) Integer.parseInt(vs[0].trim());
                         V target = (V) (Number) Integer.parseInt(vs[1].trim());
-                        Integer weight = Integer.parseInt(weights[i].trim());
-                        E edge = (E) (Number) countEdge++;
 
+                        Integer weight = null;
+                        if(weights != null)
+                            if(weights.length > i) weight = Integer.parseInt(weights[i].trim());
+
+                        E edge = (E) (Number) countEdge++;
                         addEdge(edge, source, target, weight);
+
                     }
                 }
             } catch (Exception e) {
@@ -399,8 +406,9 @@ public class GraphTO<V extends Number, E extends Number> extends UndirectedSpars
     public boolean addEdge(E edge, V v1, V v2, Integer weight) {
         boolean t = super.addEdge(edge, v1, v2);
         if(!t) return false;
+        
+        if(weight != null) edgeWeights.put(edge+"", weight);
 
-        edgeWeights.put(edge+"", weight);
         return t;
     }
 
@@ -518,7 +526,33 @@ public class GraphTO<V extends Number, E extends Number> extends UndirectedSpars
         return adj;
     }
 
-    public boolean isVertex(int v){
-        return (v >= 0) && (v < this.getVertexCount());
+    public ArrayList<ArrayList<Integer>> getAdjEdgesList(){
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+
+        String edgeString = this.getEdgeString();
+        String[] edges = edgeString != null ? edgeString.trim().split(",") : null;
+
+        for(int i = 0; i < getVertexCount(); i++){
+            adj.add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < edges.length; i++) {
+            String[] vs = edges[i].split("-");
+            if (vs.length >= 2) {
+                Integer source =  Integer.parseInt(vs[0].trim());
+                Integer target =  Integer.parseInt(vs[1].trim());
+
+                adj.get(source).add(i);
+                if(!this.isDirected){
+                    adj.get(target).add(i);
+                }
+            }       
+        }
+
+        return adj;
+    }
+
+    public boolean isVertex(Integer v){
+        return (v != null) && (v >= 0) && (v < this.getVertexCount());
     }
 }
