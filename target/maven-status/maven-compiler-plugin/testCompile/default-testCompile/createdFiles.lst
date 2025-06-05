@@ -1,0 +1,10 @@
+com/github/braully/graph/hn/GraphOperationsTest.class
+com/github/braully/graph/operation/TSSCordassoTest.class
+com/github/braully/graph/BFSUpdateTest.class
+com/github/braully/graph/hn/UndirectedSparseGraphTOTest.class
+com/github/braully/graph/ParseTest.class
+com/github/braully/graph/operation/GraphCycleChordlessDetecTest.class
+com/github/braully/graph/OperationTest.class
+com/github/braully/graph/operation/ReorderIncludeSequence.class
+com/github/braully/graph/BatchExecuteHeuristicTest.class
+com/github/braully/graph/CombinationsFacadeTest.class
