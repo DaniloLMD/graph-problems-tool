@@ -21,7 +21,7 @@ class Edge {
 
 public class BellmanFord implements IGraphOperation {
 
-    static final String type = "Danilo";
+    static final String type = "Shortest Path";
     static final String description = "Bellman-Ford";
     
     static int INF = Integer.MAX_VALUE;

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Kruskal implements IGraphOperation {
 
-    static final String type = "Danilo";
+    static final String type = "Mininum Spanning Tree";
     static final String description = "Kruskal";
 
     int[] parent, rank;

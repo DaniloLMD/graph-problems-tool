@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Dijkstra implements IGraphOperation {
 
-    static final String type = "Danilo";
+    static final String type = "Shortest Path";
     static final String description = "Dijkstra";
     static int INF = Integer.MAX_VALUE;
 
